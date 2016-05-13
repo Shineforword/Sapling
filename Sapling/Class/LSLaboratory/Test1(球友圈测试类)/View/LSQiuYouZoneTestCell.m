@@ -7,7 +7,11 @@
 //
 
 #import "LSQiuYouZoneTestCell.h"
+
 #import "LSQiuYouZoneModel.h"
+#import "LSZonePhotoContainerView.h"
+#import "LSZoneCellCommentView.h"
+
 const CGFloat LScontentLabelFontSize = 15;
 CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
 
@@ -17,9 +21,10 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) UILabel * timeLabel;
 @property (nonatomic, strong) UIButton * moreButton;
-
 @property (nonatomic, strong) UILabel * contentLabel;
 
+@property (nonatomic, strong) LSZonePhotoContainerView * photoContainerView;
+@property (nonatomic, strong) LSZoneCellCommentView * commentView;
 
 @property (nonatomic, strong) UILabel * addressLabel;
 @property (nonatomic, strong) UIButton * operationButton;
@@ -73,25 +78,47 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     [_moreButton setTitleColor:TimeLineCellHighlightedColor forState:UIControlStateNormal];
     [_moreButton addTarget:self action:@selector(moreButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     _moreButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    //操作button
+    _operationButton = [UIButton new];
+    [_operationButton setTitle:@"==" forState:UIControlStateNormal];
+    [_operationButton setTitleColor:BASE_GREEN_COLOR forState:UIControlStateNormal];
+    [_operationButton addTarget:self action:@selector(operationButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    _operationButton.titleLabel.font = [UIFont systemFontOfSize:14];
+
   
+    //相册
+    _photoContainerView = [[LSZonePhotoContainerView alloc]init];
+    
+    //评论容器
+    _commentView = [LSZoneCellCommentView new];
+
+    //地址
+    _addressLabel = [[UILabel alloc]init];
+    _addressLabel.font = [UIFont systemFontOfSize:12];
     /** 注意:添加到的父视图*/
     
     /** 取出cell的内容view*/
-    UIView *contentView = self.contentView;
+    UIView * contentView = self.contentView;
 
     [contentView addSubview:_bgView];
     
-    [_bgView addSubview:_iconImage];
-    [_bgView addSubview:_nameLabel];
-    [_bgView addSubview:_timeLabel];
-    [_bgView addSubview:_contentLabel];
-    [_bgView addSubview:_moreButton];
+    NSArray * views = @[_iconImage,
+                        _nameLabel,
+                        _timeLabel,
+                        _contentLabel,
+                        _moreButton,
+                        _photoContainerView,
+                        _commentView,
+                        _addressLabel,
+                        _operationButton];
+    [_bgView sd_addSubviews:views];
 
     _bgView.sd_layout
     .leftSpaceToView(contentView,0)
     .topSpaceToView(contentView,0)
     .widthIs(SCREEN_WIDTH)
-    .heightIs(0);
+    .heightIs(190);
     
     _iconImage.sd_layout
     .leftSpaceToView(_bgView,20)
@@ -118,13 +145,36 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     .rightSpaceToView(_bgView, 20)
     .autoHeightRatio(0);//Label传0文字高度自适应
     
-    // morebutton的高度在setmodel里面设置
+    /** morebutton的高度在setmodel里面设置*/
     _moreButton.sd_layout
     .leftEqualToView(_contentLabel)
     .topSpaceToView(_contentLabel, 0)
     .widthIs(30);
-
-
+    
+    /** 图片容器*/
+    _photoContainerView.sd_layout
+    .leftEqualToView(_contentLabel);
+    
+    /** 评论容器*/
+    _commentView.sd_layout
+    .leftEqualToView(_photoContainerView)
+    .rightSpaceToView(_bgView,10)
+    .topSpaceToView(_photoContainerView,10);
+    
+    /** 地址*/
+    _addressLabel.sd_layout
+    .leftEqualToView(_photoContainerView)
+    .rightSpaceToView(_bgView,10)
+    .topSpaceToView(_commentView,10)
+    .autoHeightRatio(0);
+    
+    /** 操作*/
+    _operationButton.sd_layout
+    .topSpaceToView(_bgView,10)
+    .rightSpaceToView(_bgView,10)
+    .heightIs(14)
+    .widthIs(40);
+    
     
 }
 - (void)setModel:(LSQiuYouZoneModel *)model{
@@ -143,6 +193,15 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     _nameLabel.text = model.name;
     _timeLabel.text = @"10分钟前";
     _contentLabel.text = model.contentStr;
+    _addressLabel.text = @"天安门西.中山公园";
+    
+    
+    /** 图片数组*/
+    _photoContainerView.picPathStringsArray = model.picNamesArray;
+
+    /* 评论设置*/
+    _commentView.frame = CGRectZero;
+    [_commentView setupWithLikeItemsArray:model.likeItemsArray commentItemsArray:model.commentItemsArray];
     
     /** 如果模型中shouldShowMoreButton(只读属性)为真*/
     if (model.shouldShowMoreButton) {
@@ -167,12 +226,30 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
         _moreButton.hidden = YES;
     }
 
-    _bgView.sd_layout
-    .leftSpaceToView(self.contentView,0)
-    .topSpaceToView(self.contentView,0)
-    .widthIs(SCREEN_WIDTH)
-    .bottomSpaceToView(self.contentView ,10);
     
+    CGFloat picContainerTopMargin = 0;
+    if (model.picNamesArray.count) {
+        picContainerTopMargin = 10;
+    }
+    /** 相册容器*/
+    _photoContainerView.sd_layout.topSpaceToView(_moreButton, picContainerTopMargin);
+    
+    /** 评论容器*/
+    _commentView.sd_layout.topSpaceToView(_photoContainerView,10);
+    
+    //评论不存在 点赞不存在
+    if (!model.commentItemsArray.count && !model.likeItemsArray.count) {
+        _commentView.fixedWidth = @0; // 如果没有评论或者点赞，设置commentview的固定宽度为0（设置了fixedWith的控件将不再在自动布局过程中调整宽度）
+        _commentView.fixedHeight = @0; // 如果没有评论或者点赞，设置commentview的固定高度为0（设置了fixedHeight的控件将不再在自动布局过程中调整高度）
+        _commentView.sd_layout.topSpaceToView(_photoContainerView, 0);
+    } else {
+        _commentView.fixedHeight = nil; // 取消固定宽度约束
+        _commentView.fixedWidth = nil; // 取消固定高度约束
+        _commentView.sd_layout.topSpaceToView(_photoContainerView, 10);
+    }
+    
+    /** */
+    [_bgView setupAutoHeightWithBottomView:_addressLabel  bottomMargin:15];
     /** 设置Cell的高度自适应，也可用于设置普通view内容高度自适应 */
     [self setupAutoHeightWithBottomView:_bgView bottomMargin:15];
 
@@ -184,6 +261,12 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     if (self.moreButtonClickedBlock) {
         self.moreButtonClickedBlock(self.indexPath);
     }
-}
 
+}
+- (void)operationButtonClicked{
+    if (self.operationButtonClickedBlock) {
+        self.operationButtonClickedBlock(self.indexPath);
+    }
+
+}
 @end

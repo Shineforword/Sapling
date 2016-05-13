@@ -231,6 +231,8 @@
 		726208F01CC7271E00EF988F /* icon_yuyin09@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726208A81CC7271E00EF988F /* icon_yuyin09@2x.png */; };
 		726208F11CC7271E00EF988F /* icon_yuyin09@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726208A91CC7271E00EF988F /* icon_yuyin09@3x.png */; };
 		726208F41CC72A9200EF988F /* ZXCommens.m in Sources */ = {isa = PBXBuildFile; fileRef = 726208F31CC72A9200EF988F /* ZXCommens.m */; };
+		727B94C61CE572D700AFFC62 /* LSZonePhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 727B94C51CE572D700AFFC62 /* LSZonePhotoContainerView.m */; };
+		727B94C91CE5802500AFFC62 /* LSZoneCellCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 727B94C81CE5802500AFFC62 /* LSZoneCellCommentView.m */; };
 		72B3A5341CC7346100B2FFB4 /* ZXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B3A5331CC7346100B2FFB4 /* ZXUser.m */; };
 		72B3A5451CC7552300B2FFB4 /* LSBaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B3A5371CC7552300B2FFB4 /* LSBaseUIViewController.m */; };
 		72B3A5461CC7552300B2FFB4 /* LSNavgationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B3A5391CC7552300B2FFB4 /* LSNavgationController.m */; };
@@ -618,6 +620,10 @@
 		726208A91CC7271E00EF988F /* icon_yuyin09@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yuyin09@3x.png"; sourceTree = "<group>"; };
 		726208F21CC72A9200EF988F /* ZXCommens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXCommens.h; sourceTree = "<group>"; };
 		726208F31CC72A9200EF988F /* ZXCommens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXCommens.m; sourceTree = "<group>"; };
+		727B94C41CE572D700AFFC62 /* LSZonePhotoContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSZonePhotoContainerView.h; sourceTree = "<group>"; };
+		727B94C51CE572D700AFFC62 /* LSZonePhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSZonePhotoContainerView.m; sourceTree = "<group>"; };
+		727B94C71CE5802500AFFC62 /* LSZoneCellCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSZoneCellCommentView.h; sourceTree = "<group>"; };
+		727B94C81CE5802500AFFC62 /* LSZoneCellCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSZoneCellCommentView.m; sourceTree = "<group>"; };
 		72B3A5321CC7346100B2FFB4 /* ZXUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXUser.h; sourceTree = "<group>"; };
 		72B3A5331CC7346100B2FFB4 /* ZXUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXUser.m; sourceTree = "<group>"; };
 		72B3A5361CC7552300B2FFB4 /* LSBaseUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSBaseUIViewController.h; sourceTree = "<group>"; };
@@ -1508,7 +1514,7 @@
 		72C80CE41CE4141E0095E62B /* LSLaboratory */ = {
 			isa = PBXGroup;
 			children = (
-				72C80CFF1CE435B70095E62B /* Test1(球友圈测试类) */,
+				72C80CFF1CE435B70095E62B /* Test1(测试类) */,
 			);
 			path = LSLaboratory;
 			sourceTree = "<group>";
@@ -1528,7 +1534,7 @@
 			path = refreshAnimations;
 			sourceTree = "<group>";
 		};
-		72C80CFF1CE435B70095E62B /* Test1(球友圈测试类) */ = {
+		72C80CFF1CE435B70095E62B /* Test1(测试类) */ = {
 			isa = PBXGroup;
 			children = (
 				72C80D001CE435B70095E62B /* LSQiuYouZoneTestController.h */,
@@ -1536,6 +1542,7 @@
 				72C80D031CE435E60095E62B /* Model */,
 				72C80D041CE435E60095E62B /* View */,
 			);
+			name = "Test1(测试类)";
 			path = "Test1(球友圈测试类)";
 			sourceTree = "<group>";
 		};
@@ -1555,6 +1562,10 @@
 				72C80D061CE436570095E62B /* ZoneTableViewHeader.m */,
 				72C80D081CE449520095E62B /* LSQiuYouZoneTestCell.h */,
 				72C80D091CE449520095E62B /* LSQiuYouZoneTestCell.m */,
+				727B94C41CE572D700AFFC62 /* LSZonePhotoContainerView.h */,
+				727B94C51CE572D700AFFC62 /* LSZonePhotoContainerView.m */,
+				727B94C71CE5802500AFFC62 /* LSZoneCellCommentView.h */,
+				727B94C81CE5802500AFFC62 /* LSZoneCellCommentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1893,6 +1904,7 @@
 				725766C61CC8AB4E00C51819 /* UploadFile.m in Sources */,
 				721E6B4D1CE1C9990020BF48 /* SDBaseRefreshView.m in Sources */,
 				725766E91CC8C88F00C51819 /* MySortingModel.m in Sources */,
+				727B94C61CE572D700AFFC62 /* LSZonePhotoContainerView.m in Sources */,
 				7262085C1CC7256200EF988F /* UIColor+UIColor.m in Sources */,
 				725766BE1CC8AB4E00C51819 /* ConvertToCommonEmoticonsHelper.m in Sources */,
 				725766A21CC8827D00C51819 /* LSSignInView.m in Sources */,
@@ -1986,6 +1998,7 @@
 				72267D9D1CCA069400F6F24E /* ZBMessageShareMenuItem.m in Sources */,
 				726208211CC71E7700EF988F /* main.m in Sources */,
 				721E6B821CE1CA7F0020BF48 /* README.md in Sources */,
+				727B94C91CE5802500AFFC62 /* LSZoneCellCommentView.m in Sources */,
 				725766A51CC8A8B000C51819 /* MBProgressHUD+Add.m in Sources */,
 				726208F41CC72A9200EF988F /* ZXCommens.m in Sources */,
 				725766CC1CC8ABF600C51819 /* EmojiEmoticons.m in Sources */,

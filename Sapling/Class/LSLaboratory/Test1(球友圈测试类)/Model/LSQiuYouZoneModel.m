@@ -58,3 +58,13 @@ extern CGFloat LSmaxContentLabelHeight;
 
 
 @end
+
+/** 类的实现*/
+@implementation LSZoneCommentItemModel
+
+@end
+
+@implementation LSZoneLikeItemModel
+
+@end
+

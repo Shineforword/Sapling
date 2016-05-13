@@ -65,8 +65,8 @@
 - (NSArray *)creatModelsWithCount:(NSInteger)count{
     /** 名字*/
     NSMutableArray * names = [[NSMutableArray alloc]init];
-    NSArray * familys = @[@"王",@"钱",@"孙",@"李"];
-    NSArray * middles = @[@"天",@"仲",@"玄",@"候"];
+    NSArray * familys = @[@"王",@"封",@"曹",@"汾"];
+    NSArray * middles = @[@"公",@"伯",@"子",@"男"];
     NSArray * lasts = @[@"飒",@"山",@"韩",@"楚"];
     for (int i = 0 ; i < 5; i ++ ) {
         int r = arc4random_uniform(3);
@@ -80,13 +80,29 @@
     NSArray * contentFalses = @[@"蜀道难,难于上青天",
                                 @"蜀道难,难于上青天,蚕丛及鱼凫开国何茫然,尔来四万八千岁,不与秦塞通人烟,西当太白有鸟道,可以横绝峨眉巅.蜀道难,难于上青天,蚕丛及鱼凫开国何茫然,尔来四万八千岁,不与秦塞通人烟,西当太白有鸟道,可以横绝峨眉巅.蜀道难,难于上青天,蚕丛及鱼凫开国何茫然,尔来四万八千岁,不与秦塞通人烟,西当太白有鸟道,可以横绝峨眉巅.",
                                 @"归去来兮,田园将芜胡不归",
-                                @"将进酒,杯莫停",
-                                @"",
+                                @"      别思     \n十里平湖霜满天,\n寸寸青丝愁华年.\n对月形单望相护,\n只羡鸳鸯不羡仙.",
+                                @"God!",
                                 ];
     for (int i = 0 ; i < 5; i++) {
         int r = arc4random_uniform(4);
         [contentsArray addObject:contentFalses[r]];
     }
+    
+    /** 用户评论内容数组*/
+    NSArray *commentsArray = @[@"鹅,鹅,鹅！👌👌👌👌",
+                               @"曲项向天歌。。。",
+                               @"白毛浮绿水",
+                               @"红掌拨清波",
+                               @"楼观沧海日？",
+                               @"门对浙江潮？？？！！！",
+                               @"无间地狱,受命无间者,永生不死,寿长乃此间大劫",
+                               @"神说,要有光,于是就有了光",
+                               @"曾经有一份真挚的爱情,放在我面前,我没有好好珍惜",
+                               @"别以为你长得帅,我就不打你",
+                               @"人生若只如初见,何事秋风悲画扇",
+                               @"人世间最痛苦的事,不是我站在你面前,你不知道我爱你,而是我...",
+                               @"生如夏花之绚烂,死如秋叶之静美💢💢💢",
+                               @""];
 
     /** 最终数组*/
     NSMutableArray * resultArray = [[NSMutableArray alloc]init];
@@ -95,6 +111,50 @@
         NSMutableDictionary * per = [[NSMutableDictionary alloc]init];
         per[@"name"] = names[r];
         per[@"contentStr"] = contentsArray[r];
+        
+        /** 伪图片数组*/
+        int photos = arc4random_uniform(9);
+        NSMutableArray * photosArray = [[NSMutableArray alloc]init];
+        for (int i = 0 ; i < photos; i ++ ) {
+            CGFloat r = arc4random_uniform(255);
+            CGFloat g  = arc4random_uniform(255);
+            CGFloat b = arc4random_uniform(255);
+            UIImage * image = [UIImage imageWithColor:QYQCOLOR(r, g, b)];
+            [photosArray addObject:image];
+        }
+        per[@"picNamesArray"] = photosArray;
+        
+        /** 赞数组*/
+        NSArray * tempLikeNames = @[@"魑",@"魅",@"魍",@"魉",@"琴",@"瑟",@"琵",@"琶"];
+        int likeRandom = arc4random_uniform(7);
+        NSMutableArray * tempLikes = [[NSMutableArray alloc]init];
+        for (int i = 0 ;  i < likeRandom ; i ++ ) {
+            LSZoneLikeItemModel * likeItemModel = [[LSZoneLikeItemModel alloc]init];
+            int index = arc4random_uniform((int)tempLikeNames.count);
+            likeItemModel.userName = tempLikeNames[index];
+            likeItemModel.userId = @"666";
+            [tempLikes addObject:likeItemModel];
+        }
+        per[@"likeItemsArray"] = [tempLikes copy];
+        
+        /** 评论随机数组*/
+        int commentRandom = arc4random_uniform(3);
+        NSMutableArray *tempComments = [NSMutableArray new];
+        for (int i = 0; i < commentRandom; i++) {
+            LSZoneCommentItemModel *commentItemModel = [[LSZoneCommentItemModel alloc]init];
+            int index = arc4random_uniform((int)names.count);
+            commentItemModel.firstUserName = names[index];
+            commentItemModel.firstUserId = @"666";
+            if (arc4random_uniform(10) < 5) {
+                commentItemModel.secondUserName = names[arc4random_uniform((int)names.count)];
+                commentItemModel.secondUserId = @"888";
+            }
+            commentItemModel.commentString = commentsArray[arc4random_uniform((int)commentsArray.count)];
+            [tempComments addObject:commentItemModel];
+        }
+        
+        per[@"commentItemsArray"] = [tempComments copy];
+
         [resultArray addObject:per];
     }
     /** 转化模型*/
@@ -127,6 +187,15 @@
     __weak typeof(self) weakSelf = self;
     if (!cell.moreButtonClickedBlock) {
         [cell setMoreButtonClickedBlock:^(NSIndexPath *indexPath) {
+            LSQiuYouZoneModel *model = weakSelf.publicArray[indexPath.row];
+            model.isOpening = !model.isOpening;
+            //刷新单一cell的方法
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }];
+    }
+    
+    if (!cell.operationButtonClickedBlock) {
+        [cell setOperationButtonClickedBlock:^(NSIndexPath *indexPath) {
             LSQiuYouZoneModel *model = weakSelf.publicArray[indexPath.row];
             model.isOpening = !model.isOpening;
             //刷新单一cell的方法

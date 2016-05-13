@@ -16,4 +16,7 @@
 
 @property (nonatomic, copy) void (^moreButtonClickedBlock)(NSIndexPath *indexPath);
 
+@property (nonatomic, copy) void (^operationButtonClickedBlock)(NSIndexPath *indexPath);
+
+
 @end
