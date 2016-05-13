@@ -15,7 +15,8 @@
 const CGFloat LScontentLabelFontSize = 15;
 CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
 
-@interface LSQiuYouZoneTestCell()
+@interface LSQiuYouZoneTestCell()<LSZoneCellCommentViewDelegate>
+
 @property (nonatomic, strong) UIView * bgView;
 @property (nonatomic, strong) UIImageView * iconImage;
 @property (nonatomic, strong) UILabel * nameLabel;
@@ -92,6 +93,7 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     
     //评论容器
     _commentView = [LSZoneCellCommentView new];
+    _commentView.delegate = self;
 
     //地址
     _addressLabel = [[UILabel alloc]init];
@@ -266,6 +268,16 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
 - (void)operationButtonClicked{
     if (self.operationButtonClickedBlock) {
         self.operationButtonClickedBlock(self.indexPath);
+    }
+
+}
+#pragma mark - LSZoneCellCommentViewDelegate
+
+- (void)replaySomeOneWith:(NSString *)str{
+   
+    if (self.replaySomeBodyBlock) {
+        
+        self.replaySomeBodyBlock(self.indexPath,str);
     }
 
 }

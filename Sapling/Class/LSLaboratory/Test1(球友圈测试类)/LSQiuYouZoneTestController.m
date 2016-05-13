@@ -10,6 +10,7 @@
 #import "ZoneTableViewHeader.h"
 #import "LSQiuYouZoneTestCell.h"
 #import "LSQiuYouZoneModel.h"
+
 #define LSQiuYouZoneTestCellID @"LSQiuYouZoneTestCell"
 @interface LSQiuYouZoneTestController()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray * publicArray;
@@ -185,6 +186,7 @@
     LSQiuYouZoneTestCell *cell = [tableView dequeueReusableCellWithIdentifier:LSQiuYouZoneTestCellID];
     cell.indexPath = indexPath;
     __weak typeof(self) weakSelf = self;
+    
     if (!cell.moreButtonClickedBlock) {
         [cell setMoreButtonClickedBlock:^(NSIndexPath *indexPath) {
             LSQiuYouZoneModel *model = weakSelf.publicArray[indexPath.row];
@@ -201,6 +203,13 @@
             //刷新单一cell的方法
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }];
+    }
+    
+    if (!cell.replaySomeBodyBlock) {
+        [cell setReplaySomeBodyBlock:^(NSIndexPath *indexPath,NSString * name) {
+            
+        }];
+    
     }
     /** 流畅*/
     cell.sd_tableView = tableView;
@@ -223,5 +232,4 @@
     }
     return width;
 }
-
 @end

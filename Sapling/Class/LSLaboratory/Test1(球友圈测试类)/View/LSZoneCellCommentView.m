@@ -11,6 +11,7 @@
 #import "MLLinkLabel.h"
 #import "LSQiuYouZoneModel.h"
 
+
 @interface LSZoneCellCommentView () <MLLinkLabelDelegate>
 
 /** 赞数组*/
@@ -175,15 +176,20 @@
 - (NSMutableAttributedString *)generateAttributedStringWithCommentItemModel:(LSZoneCommentItemModel *)model
 {
     NSString *text = model.firstUserName;
+    
     if (model.secondUserName.length) {
         text = [text stringByAppendingString:[NSString stringWithFormat:@"回复%@", model.secondUserName]];
     }
     text = [text stringByAppendingString:[NSString stringWithFormat:@"：%@", model.commentString]];
+    
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:text];
     UIColor *highLightColor = [UIColor blueColor];
-    [attString setAttributes:@{NSForegroundColorAttributeName : highLightColor, NSLinkAttributeName : model.firstUserId} range:[text rangeOfString:model.firstUserName]];
+    
+    [attString setAttributes:@{NSForegroundColorAttributeName : highLightColor, NSLinkAttributeName : model.firstUserId}
+                       range:[text rangeOfString:model.firstUserName]];
     if (model.secondUserName) {
-        [attString setAttributes:@{NSForegroundColorAttributeName : highLightColor, NSLinkAttributeName : model.secondUserId} range:[text rangeOfString:model.secondUserName]];
+        [attString setAttributes:@{NSForegroundColorAttributeName : highLightColor, NSLinkAttributeName : model.secondUserId}
+                           range:[text rangeOfString:model.secondUserName]];
     }
     return attString;
 }
@@ -195,6 +201,11 @@
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText linkLabel:(MLLinkLabel *)linkLabel
 {
     NSLog(@"%@", link.linkValue);
+    /** 回复or删除 */
+    if ([self.delegate respondsToSelector:@selector(replaySomeOneWith:)]) {
+        [self.delegate replaySomeOneWith:linkText];
+    }
+    
 }
 
 @end
