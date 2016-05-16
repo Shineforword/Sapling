@@ -50,7 +50,7 @@
 @synthesize inputBackgroundView;
 @synthesize textViewBackgroundView;
 @synthesize textView;
-@synthesize lblPlaceholder;
+@synthesize textViewPlaceHolder;
 @synthesize sendButton;
 
 @synthesize keyboardHeight;
@@ -96,12 +96,15 @@
     
     [self adjustTextInputHeightForText:@"" animated:NO];
     
-    lblPlaceholder = [[UILabel alloc] initWithFrame:CGRectMake(78.0f, topGap+2, 160, 20)];
-    lblPlaceholder.font = [UIFont systemFontOfSize:15.0f];
-    lblPlaceholder.text = @"评论...";
-    lblPlaceholder.textColor = [UIColor lightGrayColor];
-    lblPlaceholder.backgroundColor = [UIColor clearColor];
-	[self addSubview:lblPlaceholder];
+    textViewPlaceHolder = [[UILabel alloc] initWithFrame:CGRectMake(78.0f, topGap+2, 160, 20)];
+    textViewPlaceHolder.font = [UIFont systemFontOfSize:15.0f];
+    textViewPlaceHolder.text = @"评论...";
+    textViewPlaceHolder.textColor = [UIColor lightGrayColor];
+    textViewPlaceHolder.backgroundColor = [UIColor clearColor];
+    [self addSubview:textViewPlaceHolder];
+
+    
+    
     
 	sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [Tools_F setViewlayer:sendButton cornerRadius:2 borderWidth:0 borderColor:BASE_GREEN_COLOR];
@@ -132,8 +135,10 @@
     CGRect f = textView.frame;
     f.size.height = f.size.height+3;
     textViewBackgroundView.frame = f;
-    lblPlaceholder.frame = CGRectMake(8, topGap+2, 230, 20);
-    lblPlaceholder.backgroundColor = [UIColor clearColor];
+    
+    textViewPlaceHolder.frame = CGRectMake(8, topGap+2, 230, 20);
+    textViewPlaceHolder.backgroundColor = [UIColor clearColor];
+
     sendButton.frame = CGRectMake(SCREEN_WIDTH - 10 - 55,textView.frame.origin.y, 55, 27);
 }
 
@@ -225,13 +230,15 @@
 - (void) setText:(NSString*)text
 {
     textView.text = text;
-    lblPlaceholder.hidden = text.length > 0;
+    textViewPlaceHolder.hidden = text.length > 0;
+
     [self fitText];
 }
 
 - (void) setPlaceholder:(NSString*)text
 {
-    lblPlaceholder.text = text;
+    textViewPlaceHolder.text = text;
+
 }
 
 #pragma mark - Display
@@ -271,7 +278,8 @@
         [self fitText];
     }
     
-    lblPlaceholder.hidden = textView.text.length > 0;
+    textViewPlaceHolder.hidden = textView.text.length > 0;
+
 }
 
 #pragma mark - Keyboard Notifications
@@ -391,8 +399,7 @@ static inline UIViewAnimationOptions animationOptionsWithCurve(UIViewAnimationCu
 
 - (void)textViewDidChange:(UITextView*)textview{
 
-    lblPlaceholder.hidden = textview.text.length > 0;
-    
+    textViewPlaceHolder.hidden = textview.text.length > 0;
     [self fitText];
     
     if(textView.text.length == 141){

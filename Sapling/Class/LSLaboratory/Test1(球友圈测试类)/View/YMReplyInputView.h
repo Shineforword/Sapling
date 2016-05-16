@@ -31,22 +31,22 @@
 
 @property (strong, nonatomic) UIImageView* inputBackgroundView;
 @property (strong, nonatomic) UITextField *textViewBackgroundView;
+@property (assign, nonatomic) NSInteger replyTag;
 @property (strong, nonatomic) UIButton* sendButton;
 @property (strong, nonatomic) UITextView* textView;
-@property (strong, nonatomic) UILabel* lblPlaceholder;
-
 @property (readwrite, nonatomic) CGFloat keyboardHeight;
-
-@property (assign, nonatomic) NSInteger replyTag;
 @property (assign, nonatomic) BOOL autoResizeOnKeyboardVisibilityChanged;
 
 @property (assign, nonatomic) id<RePlayInputViewDelegate>delegate;
 
+/** 占位字符*/
+@property (strong, nonatomic) UILabel * textViewPlaceHolder;
 /** 被回复人姓名*/
 @property (nonatomic, strong) NSString * replayName;
 /** */
 @property (nonatomic, strong) NSIndexPath * indexPath;
-/** 初始化方法*/
+
+/** 初始化方法:(注意:减掉导航栏和TableBar的高度,添加在控制器的View上)*/
 - (id) initWithFrame:(CGRect)frame andAboveView:(UIView *)bgView;
 
 /** text的get方法*/

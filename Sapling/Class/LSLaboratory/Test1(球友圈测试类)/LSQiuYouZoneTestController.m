@@ -30,7 +30,7 @@
 - (void)viewDidLoad{
     
     [super viewDidLoad];
-    self.navigationItem.title = @"小乘佛法";
+    self.navigationItem.title = @"哈哈哈哈";
     [self loadData];
 }
 #pragma mark - 重写父类的方法
@@ -38,7 +38,7 @@
     [super setUpUI];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
      self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49);
     ZoneTableViewHeader * zoneHeader = [[ZoneTableViewHeader alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     self.tableView.tableHeaderView = zoneHeader;
@@ -221,7 +221,7 @@
             _replyView.delegate = self;
             
             _replyView.indexPath = indexPath;
-            _replyView.lblPlaceholder.text = [NSString stringWithFormat:@"回复%@:",name];
+            _replyView.textViewPlaceHolder.text = [NSString stringWithFormat:@"回复%@:",name];
             _replyView.replayName = name;
             
             [self.view addSubview:_replyView];

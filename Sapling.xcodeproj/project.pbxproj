@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		720EA9C91CE9BEC100110BBA /* LSHttpRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 720EA9C81CE9BEC100110BBA /* LSHttpRequestManager.m */; };
 		721E6A9E1CE17F740020BF48 /* LSBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 721E6A9D1CE17F740020BF48 /* LSBaseTableViewController.m */; };
 		721E6AA61CE180E20020BF48 /* LSSDContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 721E6AA51CE180E20020BF48 /* LSSDContactsTableViewController.m */; };
 		721E6AAA1CE1816C0020BF48 /* LSSDContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 721E6AA91CE1816C0020BF48 /* LSSDContactModel.m */; };
@@ -279,6 +280,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		720EA9C71CE9BEC100110BBA /* LSHttpRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSHttpRequestManager.h; sourceTree = "<group>"; };
+		720EA9C81CE9BEC100110BBA /* LSHttpRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSHttpRequestManager.m; sourceTree = "<group>"; };
 		721E6A9C1CE17F740020BF48 /* LSBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSBaseTableViewController.h; sourceTree = "<group>"; };
 		721E6A9D1CE17F740020BF48 /* LSBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSBaseTableViewController.m; sourceTree = "<group>"; };
 		721E6AA41CE180E20020BF48 /* LSSDContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSSDContactsTableViewController.h; sourceTree = "<group>"; };
@@ -1333,6 +1336,8 @@
 				725766CE1CC8B39F00C51819 /* UIViewController+HUD.m */,
 				725766A61CC8AA7B00C51819 /* ZXRequest.h */,
 				725766A71CC8AA7B00C51819 /* ZXRequest.m */,
+				720EA9C71CE9BEC100110BBA /* LSHttpRequestManager.h */,
+				720EA9C81CE9BEC100110BBA /* LSHttpRequestManager.m */,
 			);
 			path = SaplingComment;
 			sourceTree = "<group>";
@@ -1972,6 +1977,7 @@
 				721E6B461CE1C9170020BF48 /* SDTimeLineCellCommentView.m in Sources */,
 				729AD65F1CE965E600FFF354 /* YMReplyInputView.m in Sources */,
 				725766BF1CC8AB4E00C51819 /* EMDEngineManger.m in Sources */,
+				720EA9C91CE9BEC100110BBA /* LSHttpRequestManager.m in Sources */,
 				721E6B761CE1CA7F0020BF48 /* MLEmojiLabel.m in Sources */,
 				725766D91CC8C41D00C51819 /* LSBaseTableViewCell.m in Sources */,
 				721E6B831CE1CA7F0020BF48 /* TTTAttributedLabel.m in Sources */,
