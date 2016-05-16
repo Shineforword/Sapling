@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class LSZoneCommentItemModel;
 
 @protocol LSZoneCellCommentViewDelegate <NSObject>
-- (void)replaySomeOneWith:(NSString *)str;
+/** 传出一个模型*/
+- (void)replaySomeOneWith:(LSZoneCommentItemModel *)commentModel andName:(NSString *)name;
 @end
 
 @interface LSZoneCellCommentView : UIView

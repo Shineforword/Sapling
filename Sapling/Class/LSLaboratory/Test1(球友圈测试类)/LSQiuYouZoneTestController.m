@@ -10,10 +10,15 @@
 #import "ZoneTableViewHeader.h"
 #import "LSQiuYouZoneTestCell.h"
 #import "LSQiuYouZoneModel.h"
+#import "YMReplyInputView.h"
+
+#import "MLLinkLabel.h"
 
 #define LSQiuYouZoneTestCellID @"LSQiuYouZoneTestCell"
-@interface LSQiuYouZoneTestController()<UITableViewDelegate,UITableViewDataSource>
+@interface LSQiuYouZoneTestController()<UITableViewDelegate,UITableViewDataSource,RePlayInputViewDelegate>
 @property (nonatomic, strong) NSMutableArray * publicArray;
+@property (nonatomic, strong) YMReplyInputView * replyView;
+
 @end
 
 @implementation LSQiuYouZoneTestController
@@ -186,7 +191,7 @@
     LSQiuYouZoneTestCell *cell = [tableView dequeueReusableCellWithIdentifier:LSQiuYouZoneTestCellID];
     cell.indexPath = indexPath;
     __weak typeof(self) weakSelf = self;
-    
+    /** 展示全文*/
     if (!cell.moreButtonClickedBlock) {
         [cell setMoreButtonClickedBlock:^(NSIndexPath *indexPath) {
             LSQiuYouZoneModel *model = weakSelf.publicArray[indexPath.row];
@@ -195,7 +200,7 @@
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }];
     }
-    
+    /** 更多操作*/
     if (!cell.operationButtonClickedBlock) {
         [cell setOperationButtonClickedBlock:^(NSIndexPath *indexPath) {
             LSQiuYouZoneModel *model = weakSelf.publicArray[indexPath.row];
@@ -204,10 +209,22 @@
             [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }];
     }
-    
+    /** 回复*/
     if (!cell.replaySomeBodyBlock) {
-        [cell setReplaySomeBodyBlock:^(NSIndexPath *indexPath,NSString * name) {
+        [cell setReplaySomeBodyBlock:^(NSIndexPath *indexPath,LSZoneCommentItemModel * model,NSString * name) {
+           
+            if (_replyView) {
+                return;
+            }
+            _replyView = [[YMReplyInputView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44 - 64, SCREEN_WIDTH, 44)
+                                                    andAboveView:self.view];
+            _replyView.delegate = self;
             
+            _replyView.indexPath = indexPath;
+            _replyView.lblPlaceholder.text = [NSString stringWithFormat:@"回复%@:",name];
+            _replyView.replayName = name;
+            
+            [self.view addSubview:_replyView];
         }];
     
     }
@@ -221,6 +238,34 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - RePlayInputViewDelegate - 评论
+
+/** 回复评论:replyText 文本  inputTag:插入位置*/
+- (void)YMReplyInputWithReply:(NSString *)replyText appendIndexPath:(NSIndexPath * )inputIndexPath andName:(NSString *)name{
+   
+    LSZoneCommentItemModel *model = [[LSZoneCommentItemModel alloc]init];
+    
+    model.firstUserName = @"王光前";
+    model.firstUserId = @"i love you";
+    model.commentString = replyText;
+    
+    model.secondUserName = name;
+    model.secondUserId = @"i love you";
+    /** 刷新*/
+    LSQiuYouZoneModel * zoneModel = self.publicArray[inputIndexPath.row];
+    NSMutableArray * tempArray = [NSMutableArray arrayWithArray:zoneModel.commentItemsArray];
+    [tempArray addObject:model];
+    zoneModel.commentItemsArray = tempArray;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[inputIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)destoryInputView{
+    
+    [_replyView removeFromSuperview];
+    _replyView = nil;
 }
 
 - (CGFloat)cellContentViewWith

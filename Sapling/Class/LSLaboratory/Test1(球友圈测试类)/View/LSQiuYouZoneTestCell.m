@@ -12,6 +12,7 @@
 #import "LSZonePhotoContainerView.h"
 #import "LSZoneCellCommentView.h"
 
+
 const CGFloat LScontentLabelFontSize = 15;
 CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
 
@@ -273,12 +274,9 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
 }
 #pragma mark - LSZoneCellCommentViewDelegate
 
-- (void)replaySomeOneWith:(NSString *)str{
-   
+- (void)replaySomeOneWith:(LSZoneCommentItemModel *)commentModel andName:(NSString  *)name{
     if (self.replaySomeBodyBlock) {
-        
-        self.replaySomeBodyBlock(self.indexPath,str);
+        self.replaySomeBodyBlock(self.indexPath,commentModel,name);
     }
-
 }
 @end

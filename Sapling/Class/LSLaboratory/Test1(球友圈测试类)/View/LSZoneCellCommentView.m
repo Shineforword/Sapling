@@ -96,6 +96,8 @@
     for (int i = 0; i < commentItemsArray.count; i++) {
         LSZoneCommentItemModel * model = commentItemsArray[i];
         MLLinkLabel *label = self.commentLabelsArray[i];
+        /** 根据tag找到模型*/
+        label.tag = 1000 + i ;
         /** 设置评论标签的内容特性*/
         label.attributedText = [self generateAttributedStringWithCommentItemModel:model];
     }
@@ -201,11 +203,16 @@
 - (void)didClickLink:(MLLink *)link linkText:(NSString *)linkText linkLabel:(MLLinkLabel *)linkLabel
 {
     NSLog(@"%@", link.linkValue);
-    /** 回复or删除 */
-    if ([self.delegate respondsToSelector:@selector(replaySomeOneWith:)]) {
-        [self.delegate replaySomeOneWith:linkText];
-    }
     
-}
+    NSLog(@"%@", linkLabel.text);
+    /** 传出*/
+    NSLog(@"%@", linkText);
+    
+    /** 传出模型*/
+    LSZoneCommentItemModel * model =  self.commentItemsArray[linkLabel.tag - 1000];
 
+    if ([self.delegate respondsToSelector:@selector(replaySomeOneWith: andName:)]) {
+        [self.delegate replaySomeOneWith:model andName:linkText];
+    }
+}
 @end

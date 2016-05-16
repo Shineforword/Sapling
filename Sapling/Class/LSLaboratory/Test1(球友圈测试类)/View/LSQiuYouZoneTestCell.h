@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class LSQiuYouZoneModel;
-
-
+@class LSZoneCommentItemModel;
 @interface LSQiuYouZoneTestCell : UITableViewCell
 
 @property (nonatomic, strong) LSQiuYouZoneModel * model;
@@ -23,6 +22,6 @@
 @property (nonatomic, copy) void (^operationButtonClickedBlock)(NSIndexPath *indexPath);
 
 /** 回复*/
-@property (nonatomic, copy) void (^replaySomeBodyBlock)(NSIndexPath *indexPath,NSString * nameStr);
+@property (nonatomic, copy) void (^replaySomeBodyBlock)(NSIndexPath *indexPath,LSZoneCommentItemModel * model,NSString * name);
 
 @end
