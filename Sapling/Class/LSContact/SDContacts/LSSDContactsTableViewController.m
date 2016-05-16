@@ -14,7 +14,6 @@
 
 #import "LSSDContactsSearchResultController.h"
 
-#import "LSSDTimeLineTableViewController.h"
 #import "LSQiuYouZoneTestController.h"
 
 @interface LSSDContactsTableViewController () <UISearchBarDelegate>
@@ -142,7 +141,7 @@
     [newSectionArray removeObjectsInArray:temp];
     
     NSMutableArray *operrationModels = [NSMutableArray new];
-    NSArray *dicts = @[@{@"name" : @"新的朋友(GSD朋友圈)", @"imageName" : @"plugins_FriendNotify"},
+    NSArray *dicts = @[@{@"name" : @"新的朋友(测试用入口 + GSD朋友圈)", @"imageName" : @"plugins_FriendNotify"},
                        @{@"name" : @"群聊(测试用入口)", @"imageName" : @"add_friend_icon_addgroup"},
                        @{@"name" : @"标签", @"imageName" : @"Contact_icon_ContactTag"},
                        @{@"name" : @"公众号", @"imageName" : @"add_friend_icon_offical"}];
@@ -197,15 +196,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0 && indexPath.row == 0) {
-        LSSDTimeLineTableViewController  * friendZone = [[LSSDTimeLineTableViewController alloc]init];
-        friendZone.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:friendZone animated:YES];
-    }
-    if(indexPath.section == 0 && indexPath.row == 1){
         
         LSQiuYouZoneTestController * zoneVC = [[LSQiuYouZoneTestController alloc]init];
         zoneVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:zoneVC animated:YES];
+
+    }
+    if(indexPath.section == 0 && indexPath.row == 1){
+        
     }
 }
 

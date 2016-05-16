@@ -84,6 +84,13 @@
     _cycleView.localizationImageNamesGroup = locationImages;
     _cycleView.currentPageDotColor = BASE_GREEN_COLOR;
     
+    _editButton.tag = KHeaderButtonTypeEditing;
+    _photoButton.tag = KHeaderButtonTypePhoto;
+    
+    [_editButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_photoButton addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
@@ -93,5 +100,12 @@
 /** 图片滚动回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
     
+}
+
+- (void)buttonClicked:(UIButton *)button{
+    
+    if([self.delegate respondsToSelector:@selector(buttonClickedWith:)]){
+        [self.delegate buttonClickedWith:button.tag];
+    }
 }
 @end

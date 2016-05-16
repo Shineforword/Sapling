@@ -13,9 +13,10 @@
 #import "YMReplyInputView.h"
 
 #import "MLLinkLabel.h"
+#import "LSSDTimeLineTableViewController.h"
 
 #define LSQiuYouZoneTestCellID @"LSQiuYouZoneTestCell"
-@interface LSQiuYouZoneTestController()<UITableViewDelegate,UITableViewDataSource,RePlayInputViewDelegate>
+@interface LSQiuYouZoneTestController()<UITableViewDelegate,UITableViewDataSource,RePlayInputViewDelegate,ZoneTableViewHeaderDelegate>
 @property (nonatomic, strong) NSMutableArray * publicArray;
 @property (nonatomic, strong) YMReplyInputView * replyView;
 
@@ -41,6 +42,7 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
      self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49);
     ZoneTableViewHeader * zoneHeader = [[ZoneTableViewHeader alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+    zoneHeader.delegate = self;
     self.tableView.tableHeaderView = zoneHeader;
     /** tableview的实际显示位置*/
     self.tableView.contentOffset = CGPointMake(0, 40);
@@ -48,9 +50,16 @@
     [self.tableView registerClass:[LSQiuYouZoneTestCell class] forCellReuseIdentifier:LSQiuYouZoneTestCellID];
 
 }
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (void)buttonClickedWith:(KHeaderButtonType)type{
     
+    if (type == KHeaderButtonTypeEditing) {
+        
+        LSSDTimeLineTableViewController * LST = [[LSSDTimeLineTableViewController alloc]init];
+        [self.navigationController pushViewController:LST animated:YES];
+        
+    }else if(type == KHeaderButtonTypePhoto){
+        
+    }
 }
 - (void)loadData{
     NSArray * temp = [self creatModelsWithCount:10];
