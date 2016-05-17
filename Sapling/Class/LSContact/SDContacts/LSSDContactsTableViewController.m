@@ -17,6 +17,7 @@
 /** 测试用*/
 #import "LSQiuYouZoneTestController.h"
 #import "LSGCDTestController.h"
+#import "LSShowZoneController.h"
 
 @interface LSSDContactsTableViewController () <UISearchBarDelegate>
 
@@ -145,7 +146,7 @@
     NSMutableArray *operrationModels = [NSMutableArray new];
     NSArray *dicts = @[@{@"name" : @"新的朋友(测试用入口 + GSD朋友圈)", @"imageName" : @"plugins_FriendNotify"},
                        @{@"name" : @"群聊(GCD测试用入口)", @"imageName" : @"add_friend_icon_addgroup"},
-                       @{@"name" : @"标签", @"imageName" : @"Contact_icon_ContactTag"},
+                       @{@"name" : @"标签(圈)", @"imageName" : @"Contact_icon_ContactTag"},
                        @{@"name" : @"公众号", @"imageName" : @"add_friend_icon_offical"}];
     for (NSDictionary *dict in dicts) {
         LSSDContactModel *model = [LSSDContactModel new];
@@ -209,6 +210,14 @@
         gcdTestVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:gcdTestVC animated:YES];
     }
+    
+    if(indexPath.section == 0 && indexPath.row == 2){
+        
+        LSShowZoneController * showZoneVC = [[LSShowZoneController alloc]init];
+        showZoneVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:showZoneVC animated:YES];
+    }
+
 }
 
 

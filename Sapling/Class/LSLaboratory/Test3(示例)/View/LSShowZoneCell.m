@@ -1,22 +1,19 @@
 //
-//  LSQiuYouZoneTestCell.m
+//  LSShowZoneCell.m
 //  Sapling
 //
-//  Created by sport on 16/5/12.
+//  Created by sport on 16/5/17.
 //  Copyright © 2016年 光前. All rights reserved.
 //
 
-#import "LSQiuYouZoneTestCell.h"
+#import "LSShowZoneCell.h"
+#import "LSShowZoneModel.h"
+#import "LSShowZonePhotosContainer.h"
 
-#import "LSQiuYouZoneModel.h"
-#import "LSZonePhotoContainerView.h"
-#import "LSZoneCellCommentView.h"
+const CGFloat  LSShowZoneCellContentLabelFontSize = 15;
+CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
 
-
-const CGFloat LScontentLabelFontSize = 15;
-CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
-
-@interface LSQiuYouZoneTestCell()<LSZoneCellCommentViewDelegate>
+@interface LSShowZoneCell()
 
 @property (nonatomic, strong) UIView * bgView;
 @property (nonatomic, strong) UIImageView * iconImage;
@@ -25,27 +22,28 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
 @property (nonatomic, strong) UIButton * moreButton;
 @property (nonatomic, strong) UILabel * contentLabel;
 
-@property (nonatomic, strong) LSZonePhotoContainerView * photoContainerView;
-@property (nonatomic, strong) LSZoneCellCommentView * commentView;
+@property (nonatomic, strong) LSShowZonePhotosContainer * photoContainerView;
 
 @property (nonatomic, strong) UILabel * addressLabel;
 @property (nonatomic, strong) UIButton * operationButton;
 @property (nonatomic, strong) UIView * line;
 
 @end
-@implementation LSQiuYouZoneTestCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = BASE_VC_COLOR;
-        [self setupView];
+@implementation LSShowZoneCell
 
-    }
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+        [self setupView];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = BASE_VC_COLOR;
+    }
     return self;
 }
+
 - (void)setupView{
+ 
     /** 底色*/
     _bgView = [[UIView alloc]init];
     _bgView.backgroundColor = [UIColor whiteColor];
@@ -53,25 +51,31 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     /** 头像*/
     _iconImage = [[UIImageView alloc]init];
     _iconImage.clipsToBounds = YES;
-    _iconImage.layer.cornerRadius = 25;
+    _iconImage.layer.cornerRadius = 5;
     
     /** 姓名*/
     _nameLabel = [[UILabel alloc]init];
-    _nameLabel.font = [UIFont systemFontOfSize:12];
+    _nameLabel.textColor = BASE_GREEN_COLOR;
+    _nameLabel.font = [UIFont systemFontOfSize:15];
     
     /** 时间*/
     _timeLabel = [[UILabel alloc]init];
+    _timeLabel.textColor = BASE_3_COLOR;
     _timeLabel.font = [UIFont systemFontOfSize:10];
     
     /** 内容*/
     _contentLabel = [[UILabel alloc]init];
-    _contentLabel.font = [UIFont systemFontOfSize:13];
-   
+    _contentLabel.textColor = BASE_6_COLOR;
+    _contentLabel.font = [UIFont systemFontOfSize:15];
     
+    //地址
+    _addressLabel = [[UILabel alloc]init];
+    _addressLabel.font = [UIFont systemFontOfSize:10];
+
     //最大内容显示高度
-    if (LSmaxContentLabelHeight == 0) {
+    if (LSMaxContentLabelHeight == 0) {
         /** 初始化时默认最大内容展示高度如果为0时,设置为3行文本的高度*/
-        LSmaxContentLabelHeight = _contentLabel.font.lineHeight * 3;
+        LSMaxContentLabelHeight = _contentLabel.font.lineHeight * 3;
     }
     
     //全文button
@@ -88,35 +92,26 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     [_operationButton addTarget:self action:@selector(operationButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     _operationButton.titleLabel.font = [UIFont systemFontOfSize:14];
 
-  
-    //相册
-    _photoContainerView = [[LSZonePhotoContainerView alloc]init];
-    
-    //评论容器
-    _commentView = [LSZoneCellCommentView new];
-    _commentView.delegate = self;
-
-    //地址
-    _addressLabel = [[UILabel alloc]init];
-    _addressLabel.font = [UIFont systemFontOfSize:12];
-    /** 注意:添加到的父视图*/
-    
+    _photoContainerView = [[LSShowZonePhotosContainer alloc]init];
     /** 取出cell的内容view*/
     UIView * contentView = self.contentView;
-
+    
     [contentView addSubview:_bgView];
     
-    NSArray * views = @[_iconImage,
+    NSArray * views = @[
+                        _iconImage,
                         _nameLabel,
                         _timeLabel,
                         _contentLabel,
                         _moreButton,
-                        _photoContainerView,
-                        _commentView,
                         _addressLabel,
-                        _operationButton];
+                        _operationButton,
+                        _photoContainerView,
+                        ];
     [_bgView sd_addSubviews:views];
-
+    
+    CGFloat margin = 10;
+    
     _bgView.sd_layout
     .leftSpaceToView(contentView,0)
     .topSpaceToView(contentView,0)
@@ -124,28 +119,28 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     .heightIs(190);
     
     _iconImage.sd_layout
-    .leftSpaceToView(_bgView,20)
-    .topSpaceToView(_bgView,10)
+    .leftSpaceToView(_bgView,margin)
+    .topSpaceToView(_bgView,margin)
     .widthIs(50)
     .heightIs(50);
     
     _nameLabel.sd_layout
-    .leftSpaceToView(_iconImage,10)
+    .leftSpaceToView(_iconImage,margin)
     .topSpaceToView(_bgView,15)
     .widthIs(SCREEN_WIDTH - 20 - 50 - 10)
     .heightIs(12);
     
     _timeLabel.sd_layout
-    .leftSpaceToView(_iconImage,10)
-    .topSpaceToView(_nameLabel,10)
+    .leftSpaceToView(_iconImage,margin)
+    .topSpaceToView(_nameLabel,margin)
     .widthIs(SCREEN_WIDTH - 20 - 50 - 10)
     .heightIs(10);
     
     
     _contentLabel.sd_layout
-    .leftSpaceToView(_bgView,20)
-    .topSpaceToView(_iconImage, 10)
-    .rightSpaceToView(_bgView, 20)
+    .leftSpaceToView(_bgView,margin)
+    .topSpaceToView(_iconImage, margin)
+    .rightSpaceToView(_bgView, margin)
     .autoHeightRatio(0);//Label传0文字高度自适应
     
     /** morebutton的高度在setmodel里面设置*/
@@ -158,30 +153,18 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
     _photoContainerView.sd_layout
     .leftEqualToView(_contentLabel);
     
-    /** 评论容器*/
-    _commentView.sd_layout
-    .leftEqualToView(_photoContainerView)
-    .rightSpaceToView(_bgView,10)
-    .topSpaceToView(_photoContainerView,10);
     
-    /** 地址*/
     _addressLabel.sd_layout
-    .leftEqualToView(_photoContainerView)
-    .rightSpaceToView(_bgView,10)
-    .topSpaceToView(_commentView,10)
-    .autoHeightRatio(0);
-    
-    /** 操作*/
-    _operationButton.sd_layout
-    .topSpaceToView(_bgView,10)
-    .rightSpaceToView(_bgView,10)
-    .heightIs(14)
-    .widthIs(40);
+    .topSpaceToView(_photoContainerView,margin)
+    .leftSpaceToView(_bgView,margin)
+    .heightIs(20)
+    .widthIs(SCREEN_WIDTH - margin);
     
     
 }
-- (void)setModel:(LSQiuYouZoneModel *)model{
+-(void)setModel:(LSShowZoneModel *)model{
     _model = model;
+    
     /** 头像数组*/
     NSMutableArray * iconImages = [[NSMutableArray alloc]init];
     for (int i = 0 ; i < 5; i ++ ) {
@@ -192,20 +175,12 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
         [iconImages addObject:image];
     }
     int b = arc4random_uniform(5);
-    _iconImage.image = iconImages[b];
     
+    _iconImage.image = iconImages[b];
     _nameLabel.text = model.name;
     _timeLabel.text = @"10分钟前";
     _contentLabel.text = model.contentStr;
     _addressLabel.text = @"天安门西.中山公园";
-    
-    
-    /** 图片数组*/
-    _photoContainerView.picPathStringsArray = model.picNamesArray;
-
-    /* 评论设置*/
-    _commentView.frame = CGRectZero;
-    [_commentView setupWithLikeItemsArray:model.likeItemsArray commentItemsArray:model.commentItemsArray];
     
     /** 如果模型中shouldShowMoreButton(只读属性)为真*/
     if (model.shouldShowMoreButton) {
@@ -221,7 +196,7 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
             [_moreButton setTitle:@"收起" forState:UIControlStateNormal];
         } else {
             /** 收起回位*/
-            _contentLabel.sd_layout.maxHeightIs(LSmaxContentLabelHeight);
+            _contentLabel.sd_layout.maxHeightIs(LSMaxContentLabelHeight);
             [_moreButton setTitle:@"全文" forState:UIControlStateNormal];
         }
     } else {
@@ -229,55 +204,33 @@ CGFloat LSmaxContentLabelHeight = 0; // 根据具体font而定
         _moreButton.sd_layout.heightIs(0);
         _moreButton.hidden = YES;
     }
-
     
     CGFloat picContainerTopMargin = 0;
-    if (model.picNamesArray.count) {
+    if (model.photosArray.count) {
         picContainerTopMargin = 10;
     }
+    _photoContainerView.picPathStringsArray = model.photosArray;
     /** 相册容器*/
     _photoContainerView.sd_layout.topSpaceToView(_moreButton, picContainerTopMargin);
-    
-    /** 评论容器*/
-    _commentView.sd_layout.topSpaceToView(_photoContainerView,10);
-    
-    //评论不存在 点赞不存在
-    if (!model.commentItemsArray.count && !model.likeItemsArray.count) {
-        _commentView.fixedWidth = @0; // 如果没有评论或者点赞，设置commentview的固定宽度为0（设置了fixedWith的控件将不再在自动布局过程中调整宽度）
-        _commentView.fixedHeight = @0; // 如果没有评论或者点赞，设置commentview的固定高度为0（设置了fixedHeight的控件将不再在自动布局过程中调整高度）
-        _commentView.sd_layout.topSpaceToView(_photoContainerView, 0);
-    } else {
-        _commentView.fixedHeight = nil; // 取消固定宽度约束
-        _commentView.fixedWidth = nil; // 取消固定高度约束
-        _commentView.sd_layout.topSpaceToView(_photoContainerView, 10);
-    }
     
     /** */
     [_bgView setupAutoHeightWithBottomView:_addressLabel  bottomMargin:15];
     /** 设置Cell的高度自适应，也可用于设置普通view内容高度自适应 */
     [self setupAutoHeightWithBottomView:_bgView bottomMargin:15];
-
 }
 #pragma mark - private actions
-
 - (void)moreButtonClicked
 {
     if (self.moreButtonClickedBlock) {
         self.moreButtonClickedBlock(self.indexPath);
     }
-
+    
 }
 - (void)operationButtonClicked{
     if (self.operationButtonClickedBlock) {
         self.operationButtonClickedBlock(self.indexPath);
     }
-
+    
 }
-#pragma mark - LSZoneCellCommentViewDelegate
 
-- (void)replaySomeOneWith:(LSZoneCommentItemModel *)commentModel andName:(NSString  *)name{
-    if (self.replaySomeBodyBlock) {
-        self.replaySomeBodyBlock(self.indexPath,commentModel,name);
-    }
-}
 @end

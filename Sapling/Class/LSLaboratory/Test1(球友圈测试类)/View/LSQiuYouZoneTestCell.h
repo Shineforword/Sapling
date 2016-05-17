@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class LSQiuYouZoneModel;
 @class LSZoneCommentItemModel;
+
 @interface LSQiuYouZoneTestCell : UITableViewCell
 
 @property (nonatomic, strong) LSQiuYouZoneModel * model;
