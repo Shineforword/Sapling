@@ -256,18 +256,23 @@
    
     LSZoneCommentItemModel *model = [[LSZoneCommentItemModel alloc]init];
     
-    model.firstUserName = @"王光前";
+    /** 用户*/
+    model.firstUserName = @"光前";
     model.firstUserId = @"i love you";
+    /** 回复内容*/
     model.commentString = replyText;
     
+    /** 被回复者*/
     model.secondUserName = name;
     model.secondUserId = @"i love you";
-    /** 刷新*/
+    
+    /** 更新model*/
     LSQiuYouZoneModel * zoneModel = self.publicArray[inputIndexPath.row];
     NSMutableArray * tempArray = [NSMutableArray arrayWithArray:zoneModel.commentItemsArray];
     [tempArray addObject:model];
     zoneModel.commentItemsArray = tempArray;
     
+    /** 刷新表*/
     [self.tableView reloadRowsAtIndexPaths:@[inputIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 

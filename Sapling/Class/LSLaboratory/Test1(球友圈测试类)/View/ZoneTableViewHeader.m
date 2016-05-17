@@ -68,7 +68,7 @@
     .heightIs(160);
     
     
-    [_editButton setTitle:@"状态" forState:UIControlStateNormal];
+    [_editButton setTitle:@"GSD朋友圈" forState:UIControlStateNormal];
     [_photoButton setTitle:@"照片" forState:UIControlStateNormal];
 //    NSArray * cycleArray = [[NSArray alloc]initWithObjects:@"",@"", nil];
 //    /** 网络url数组*/

@@ -232,6 +232,11 @@
 		726208F01CC7271E00EF988F /* icon_yuyin09@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726208A81CC7271E00EF988F /* icon_yuyin09@2x.png */; };
 		726208F11CC7271E00EF988F /* icon_yuyin09@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726208A91CC7271E00EF988F /* icon_yuyin09@3x.png */; };
 		726208F41CC72A9200EF988F /* ZXCommens.m in Sources */ = {isa = PBXBuildFile; fileRef = 726208F31CC72A9200EF988F /* ZXCommens.m */; };
+		726435CC1CEAAFCA002CFAF8 /* LSGCDGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435CB1CEAAFCA002CFAF8 /* LSGCDGroup.m */; };
+		726435CF1CEAB692002CFAF8 /* LSGCDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435CE1CEAB692002CFAF8 /* LSGCDQueue.m */; };
+		726435D21CEAC174002CFAF8 /* LSGCDSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435D11CEAC174002CFAF8 /* LSGCDSemaphore.m */; };
+		726435D51CEAC1C6002CFAF8 /* LSGCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435D41CEAC1C6002CFAF8 /* LSGCDTimer.m */; };
+		726435DA1CEAC2D7002CFAF8 /* LSGCDTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435D91CEAC2D7002CFAF8 /* LSGCDTestController.m */; };
 		727B94C61CE572D700AFFC62 /* LSZonePhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 727B94C51CE572D700AFFC62 /* LSZonePhotoContainerView.m */; };
 		727B94C91CE5802500AFFC62 /* LSZoneCellCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 727B94C81CE5802500AFFC62 /* LSZoneCellCommentView.m */; };
 		729AD65F1CE965E600FFF354 /* YMReplyInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729AD65E1CE965E600FFF354 /* YMReplyInputView.m */; };
@@ -624,6 +629,17 @@
 		726208A91CC7271E00EF988F /* icon_yuyin09@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_yuyin09@3x.png"; sourceTree = "<group>"; };
 		726208F21CC72A9200EF988F /* ZXCommens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXCommens.h; sourceTree = "<group>"; };
 		726208F31CC72A9200EF988F /* ZXCommens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXCommens.m; sourceTree = "<group>"; };
+		726435CA1CEAAFCA002CFAF8 /* LSGCDGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSGCDGroup.h; sourceTree = "<group>"; };
+		726435CB1CEAAFCA002CFAF8 /* LSGCDGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSGCDGroup.m; sourceTree = "<group>"; };
+		726435CD1CEAB692002CFAF8 /* LSGCDQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSGCDQueue.h; sourceTree = "<group>"; };
+		726435CE1CEAB692002CFAF8 /* LSGCDQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSGCDQueue.m; sourceTree = "<group>"; };
+		726435D01CEAC174002CFAF8 /* LSGCDSemaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSGCDSemaphore.h; sourceTree = "<group>"; };
+		726435D11CEAC174002CFAF8 /* LSGCDSemaphore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSGCDSemaphore.m; sourceTree = "<group>"; };
+		726435D31CEAC1C6002CFAF8 /* LSGCDTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSGCDTimer.h; sourceTree = "<group>"; };
+		726435D41CEAC1C6002CFAF8 /* LSGCDTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSGCDTimer.m; sourceTree = "<group>"; };
+		726435D71CEAC24C002CFAF8 /* LSGCD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSGCD.h; sourceTree = "<group>"; };
+		726435D81CEAC2D7002CFAF8 /* LSGCDTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSGCDTestController.h; sourceTree = "<group>"; };
+		726435D91CEAC2D7002CFAF8 /* LSGCDTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSGCDTestController.m; sourceTree = "<group>"; };
 		727B94C41CE572D700AFFC62 /* LSZonePhotoContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSZonePhotoContainerView.h; sourceTree = "<group>"; };
 		727B94C51CE572D700AFFC62 /* LSZonePhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSZonePhotoContainerView.m; sourceTree = "<group>"; };
 		727B94C71CE5802500AFFC62 /* LSZoneCellCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSZoneCellCommentView.h; sourceTree = "<group>"; };
@@ -1457,6 +1473,32 @@
 			path = Class;
 			sourceTree = "<group>";
 		};
+		726435C81CEAAE60002CFAF8 /* Test2(GCD多线程) */ = {
+			isa = PBXGroup;
+			children = (
+				726435D81CEAC2D7002CFAF8 /* LSGCDTestController.h */,
+				726435D91CEAC2D7002CFAF8 /* LSGCDTestController.m */,
+				726435C91CEAAFAE002CFAF8 /* GCD */,
+			);
+			path = "Test2(GCD多线程)";
+			sourceTree = "<group>";
+		};
+		726435C91CEAAFAE002CFAF8 /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				726435CA1CEAAFCA002CFAF8 /* LSGCDGroup.h */,
+				726435CB1CEAAFCA002CFAF8 /* LSGCDGroup.m */,
+				726435CD1CEAB692002CFAF8 /* LSGCDQueue.h */,
+				726435CE1CEAB692002CFAF8 /* LSGCDQueue.m */,
+				726435D01CEAC174002CFAF8 /* LSGCDSemaphore.h */,
+				726435D11CEAC174002CFAF8 /* LSGCDSemaphore.m */,
+				726435D31CEAC1C6002CFAF8 /* LSGCDTimer.h */,
+				726435D41CEAC1C6002CFAF8 /* LSGCDTimer.m */,
+				726435D71CEAC24C002CFAF8 /* LSGCD.h */,
+			);
+			path = GCD;
+			sourceTree = "<group>";
+		};
 		72B3A5351CC7552300B2FFB4 /* LSBasicalClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -1523,6 +1565,7 @@
 			isa = PBXGroup;
 			children = (
 				72C80CFF1CE435B70095E62B /* Test1(测试类) */,
+				726435C81CEAAE60002CFAF8 /* Test2(GCD多线程) */,
 			);
 			path = LSLaboratory;
 			sourceTree = "<group>";
@@ -1911,14 +1954,17 @@
 				725767051CC8D27200C51819 /* LSAddFriendViewController.m in Sources */,
 				726208271CC71E7700EF988F /* ViewController.m in Sources */,
 				72267D951CCA069400F6F24E /* DXRecordView.m in Sources */,
+				726435D21CEAC174002CFAF8 /* LSGCDSemaphore.m in Sources */,
 				725766C61CC8AB4E00C51819 /* UploadFile.m in Sources */,
 				721E6B4D1CE1C9990020BF48 /* SDBaseRefreshView.m in Sources */,
+				726435CC1CEAAFCA002CFAF8 /* LSGCDGroup.m in Sources */,
 				725766E91CC8C88F00C51819 /* MySortingModel.m in Sources */,
 				727B94C61CE572D700AFFC62 /* LSZonePhotoContainerView.m in Sources */,
 				7262085C1CC7256200EF988F /* UIColor+UIColor.m in Sources */,
 				725766BE1CC8AB4E00C51819 /* ConvertToCommonEmoticonsHelper.m in Sources */,
 				725766A21CC8827D00C51819 /* LSSignInView.m in Sources */,
 				72267D981CCA069400F6F24E /* QYQChatController.m in Sources */,
+				726435CF1CEAB692002CFAF8 /* LSGCDQueue.m in Sources */,
 				721E6B781CE1CA7F0020BF48 /* NSMutableAttributedString+MLLabel.m in Sources */,
 				72267D971CCA069400F6F24E /* QYQChatCell.m in Sources */,
 				721E6B2C1CE1C8870020BF48 /* SDRefreshView.m in Sources */,
@@ -1938,11 +1984,13 @@
 				721E6B7E1CE1CA7F0020BF48 /* MLLabelLayoutManager.m in Sources */,
 				72B3A5451CC7552300B2FFB4 /* LSBaseUIViewController.m in Sources */,
 				721E6B441CE1C9170020BF48 /* SDTimeLineCellModel.m in Sources */,
+				726435DA1CEAC2D7002CFAF8 /* LSGCDTestController.m in Sources */,
 				721E6B7D1CE1CA7F0020BF48 /* NSString+MLExpression.m in Sources */,
 				72B3A5521CC75FFA00B2FFB4 /* LSWelcomeViewController.m in Sources */,
 				725766FF1CC8CD3D00C51819 /* LSDetailMessageViewController.m in Sources */,
 				725766DC1CC8C45C00C51819 /* LSEditSelfInfoViewController.m in Sources */,
 				725766F01CC8C96800C51819 /* UIView+LayoutMethods.m in Sources */,
+				726435D51CEAC1C6002CFAF8 /* LSGCDTimer.m in Sources */,
 				72267D9B1CCA069400F6F24E /* UUAVAudioPlayer.m in Sources */,
 				721E6B8E1CE1CAA90020BF48 /* SDWaitingView.m in Sources */,
 				726208241CC71E7700EF988F /* AppDelegate.m in Sources */,
