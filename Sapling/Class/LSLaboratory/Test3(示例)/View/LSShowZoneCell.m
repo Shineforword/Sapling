@@ -55,21 +55,22 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     
     /** 姓名*/
     _nameLabel = [[UILabel alloc]init];
-    _nameLabel.textColor = BASE_GREEN_COLOR;
-    _nameLabel.font = [UIFont systemFontOfSize:15];
+    _nameLabel.textColor = QYQHEXCOLOR(0x00c7c8);
+    _nameLabel.font = [UIFont systemFontOfSize:13];
     
     /** 时间*/
     _timeLabel = [[UILabel alloc]init];
-    _timeLabel.textColor = BASE_3_COLOR;
+    _timeLabel.textColor = BASE_9_COLOR;
     _timeLabel.font = [UIFont systemFontOfSize:10];
     
     /** 内容*/
     _contentLabel = [[UILabel alloc]init];
     _contentLabel.textColor = BASE_6_COLOR;
-    _contentLabel.font = [UIFont systemFontOfSize:15];
+    _contentLabel.font = [UIFont systemFontOfSize:14];
     
     //地址
     _addressLabel = [[UILabel alloc]init];
+    _addressLabel.textColor = QYQHEXCOLOR(0x00c7c8);
     _addressLabel.font = [UIFont systemFontOfSize:10];
 
     //最大内容显示高度
@@ -120,26 +121,26 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     
     _iconImage.sd_layout
     .leftSpaceToView(_bgView,margin)
-    .topSpaceToView(_bgView,margin)
-    .widthIs(50)
-    .heightIs(50);
+    .topSpaceToView(_bgView,margin + 3)
+    .widthIs(32)
+    .heightIs(32);
     
     _nameLabel.sd_layout
-    .leftSpaceToView(_iconImage,margin)
-    .topSpaceToView(_bgView,15)
+    .leftSpaceToView(_iconImage,margin - 1)
+    .topSpaceToView(_bgView,16)
     .widthIs(SCREEN_WIDTH - 20 - 50 - 10)
-    .heightIs(12);
+    .heightIs(13);
     
     _timeLabel.sd_layout
     .leftSpaceToView(_iconImage,margin)
-    .topSpaceToView(_nameLabel,margin)
+    .topSpaceToView(_nameLabel,5)
     .widthIs(SCREEN_WIDTH - 20 - 50 - 10)
     .heightIs(10);
     
     
     _contentLabel.sd_layout
     .leftSpaceToView(_bgView,margin)
-    .topSpaceToView(_iconImage, margin)
+    .topSpaceToView(_iconImage, margin + 2)
     .rightSpaceToView(_bgView, margin)
     .autoHeightRatio(0);//Label传0文字高度自适应
     
@@ -155,7 +156,7 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     
     
     _addressLabel.sd_layout
-    .topSpaceToView(_photoContainerView,margin)
+    .topSpaceToView(_photoContainerView,margin + 2)
     .leftSpaceToView(_bgView,margin)
     .heightIs(20)
     .widthIs(SCREEN_WIDTH - margin);
@@ -178,9 +179,9 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     
     _iconImage.image = iconImages[b];
     _nameLabel.text = model.name;
-    _timeLabel.text = @"10分钟前";
+    _timeLabel.text = model.time;
     _contentLabel.text = model.contentStr;
-    _addressLabel.text = @"天安门西.中山公园";
+    _addressLabel.text = model.address;
     
     /** 如果模型中shouldShowMoreButton(只读属性)为真*/
     if (model.shouldShowMoreButton) {

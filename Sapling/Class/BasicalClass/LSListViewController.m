@@ -24,6 +24,7 @@
 #pragma mark - Super - Method
 - (void)setUpUI{
     [self.view addSubview:self.tableView];
+    
     __weak __typeof(self) weakSelf = self;
     
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）

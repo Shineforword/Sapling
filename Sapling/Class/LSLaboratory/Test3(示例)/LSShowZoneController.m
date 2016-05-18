@@ -11,6 +11,8 @@
 #import "LSShowZoneCell.h"
 #import "LSShowZoneModel.h"
 
+#import "LSPhotographyController.h"
+
 #define LSShowZoneCellID @"LSShowZoneCell"
 
 @interface LSShowZoneController()<UITableViewDelegate,UITableViewDataSource,ZoneTableViewHeaderDelegate>
@@ -31,7 +33,17 @@
     self.navigationItem.title = @"哈哈哈哈";
     [self loadData];
 }
+#pragma mark - ZoneTableViewHeaderDelegate
 
+- (void)buttonClickedWith:(KHeaderButtonType)type{
+    
+    if (type == KHeaderButtonTypePhoto){
+        
+        LSPhotographyController * photographyVC = [[LSPhotographyController alloc]init];
+        photographyVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:photographyVC animated:YES];
+    }
+}
 #pragma mark - 重写父类的方法
 - (void)setUpUI{
     [super setUpUI];
@@ -39,6 +51,7 @@
     [self.tableView setDataSource:self];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49);
+    
     ZoneTableViewHeader * zoneHeader = [[ZoneTableViewHeader alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     zoneHeader.delegate = self;
     self.tableView.tableHeaderView = zoneHeader;
@@ -84,6 +97,8 @@
                                 @"      别思     \n十里平湖霜满天,\n寸寸青丝愁华年.\n对月形单望相护,\n只羡鸳鸯不羡仙.",
                                 @"God!",
                                 ];
+    NSArray * addresses = @[@"花果山",@"水帘洞",@"大雷音寺",@"南天门",@"阎罗殿"];
+    NSArray * times = @[@"1分钟前",@"5分钟前",@"10分钟前",@"1小时前",@"1天前"];
     for (int i = 0 ; i < 5; i++) {
         int r = arc4random_uniform(4);
         [contentsArray addObject:contentFalses[r]];
@@ -95,8 +110,10 @@
         NSMutableDictionary * per = [[NSMutableDictionary alloc]init];
         per[@"name"] = names[r];
         per[@"contentStr"] = contentsArray[r];
+        per[@"address"] =[NSString stringWithFormat:@"天安门西 ⊙ 中山公园 ⊙ %@",addresses[r]];
+        per[@"time"] = times[r];
         /** 伪图片数组*/
-        int photos = arc4random_uniform(9);
+        int photos = arc4random_uniform(7);
         NSMutableArray * photosArray = [[NSMutableArray alloc]init];
         for (int i = 0 ; i < photos; i ++ ) {
             CGFloat r = arc4random_uniform(255);

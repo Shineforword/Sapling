@@ -54,53 +54,130 @@
         return;
     }
     
-    //开始设置图片
-    //计算图片的宽高
-    CGFloat itemW = [self itemWidthForPicPathArray:_picPathStringsArray];
-    CGFloat itemH = 0;
-   
-    //如果只有一张图片
+    CGFloat itemH = 125;
     if (_picPathStringsArray.count == 1) {
-        UIImage *image = _picPathStringsArray.firstObject;
-        if (image.size.width) {
-            itemH = image.size.height / image.size.width * itemW;
-        }
         
-    } else {
+        itemH = 150;
+    }
+    //设置图片
+    if ((_picPathStringsArray.count < 5 || _picPathStringsArray.count ==  6) && _picPathStringsArray.count != 0  ) {
+        //计算图片的宽高
+        CGFloat itemW = [self itemWidthForPicPathArray:_picPathStringsArray];
+        //每一行图片的张数
+        long perRowItemCount = [self perRowItemCountForPicPathArray:_picPathStringsArray];
+        //设置留白
+        CGFloat margin = 10;
         
-        itemH = itemW;
+        [_picPathStringsArray enumerateObjectsUsingBlock:^(UIImage *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            //九宫格
+            long columnIndex = idx % perRowItemCount;
+            long rowIndex = idx / perRowItemCount;
+            
+            UIImageView *imageView = [_imageViewsArray objectAtIndex:idx];
+            imageView.hidden = NO;
+            imageView.image = obj;
+            
+            imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
+        }];
+        
+        CGFloat w = perRowItemCount * itemW + (perRowItemCount - 1) * margin;
+        
+        int columnCount = ceilf(_picPathStringsArray.count * 1.0 / perRowItemCount);
+        CGFloat h = columnCount * itemH + (columnCount - 1) * margin;
+        
+        self.width = w;
+        self.height = h;
+        
+        /** 设置固定高度保证高度不在自动布局过程中再做调整  */
+        self.fixedHeight = @(h);
+        /** 设置固定宽度保证宽度不在自动布局过程中再做调整  */
+        self.fixedWidth = @(w);
+        
+    }else if (_picPathStringsArray.count == 5){
+        
+        //计算图片的宽高
+      __block CGFloat itemW = [self itemWidthForPicPathArray:_picPathStringsArray];
+        //每一行图片的张数
+      __block  long perRowItemCount = [self perRowItemCountForPicPathArray:_picPathStringsArray];
+        CGFloat margin = 10;
+        
+        [_picPathStringsArray enumerateObjectsUsingBlock:^(UIImage *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            /** 5张图片特殊排法*/
+            if(idx < 2){
+                perRowItemCount = 2;
+                itemW = (SCREEN_WIDTH - 10 * 3)/2;
+                
+            }else{
+                perRowItemCount = 3;
+                itemW = (SCREEN_WIDTH - 10 * 4)/3;
+            }
+            
+            long columnIndex = idx % perRowItemCount;
+            long rowIndex = idx / perRowItemCount;
+            
+            if (idx  ==  2) {
+                rowIndex = 1;
+                columnIndex = 0;
+            }
+            if (idx  ==  3) {
+                rowIndex = 1;
+                columnIndex = 1;
+            }
+            if (idx  ==  4) {
+                rowIndex = 1;
+                columnIndex = 2;
+            }
+            UIImageView *imageView = [_imageViewsArray objectAtIndex:idx];
+            imageView.hidden = NO;
+            imageView.image = obj;
+            imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
+        }];
+        
+        CGFloat w = perRowItemCount * itemW + (perRowItemCount - 1) * margin;
+        int columnCount = ceilf(_picPathStringsArray.count * 1.0 / perRowItemCount);
+        CGFloat h = columnCount * itemH + (columnCount - 1) * margin;
+        
+        self.width = w;
+        self.height = h;
+        /** 设置固定高度保证高度不在自动布局过程中再做调整  */
+        self.fixedHeight = @(h);
+        /** 设置固定宽度保证宽度不在自动布局过程中再做调整  */
+        self.fixedWidth = @(w);
+    }
+}
+/** 当图片少于5张或为6张,单张图片的宽度*/
+- (CGFloat)itemWidthForPicPathArray:(NSArray *)array
+{
+    CGFloat margin = 10;
+    if (array.count < 4) {
+        
+        return (SCREEN_WIDTH - margin*(array.count+1))/array.count;
+        
+    }else if (array.count == 6){
+        
+        return (SCREEN_WIDTH - margin*4)/3;
+        
+    }else{
+        
+        return (SCREEN_WIDTH - margin*3)/2;
+
     }
     
-    //每一行图片的张数
-    long perRowItemCount = [self perRowItemCountForPicPathArray:_picPathStringsArray];
-    //设置留白
-    CGFloat margin = 5;
-    
-    //enumerateObjectsUsingBlock block 方法快速遍历数组(数组较大时效率比较搞)
-    [_picPathStringsArray enumerateObjectsUsingBlock:^(UIImage *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        //九宫格
-        long columnIndex = idx % perRowItemCount;
-        long rowIndex = idx / perRowItemCount;
+}
+/** 当图片少于5张或为6张,计算每一行图片的张数*/
+- (NSInteger)perRowItemCountForPicPathArray:(NSArray *)array
+{
+    if (array.count < 4) {
         
-        UIImageView *imageView = [_imageViewsArray objectAtIndex:idx];
-        imageView.hidden = NO;
-        imageView.image = obj;
+        return array.count;
+
+    }else if(array.count == 6){
         
-        imageView.frame = CGRectMake(columnIndex * (itemW + margin), rowIndex * (itemH + margin), itemW, itemH);
-    }];
-    
-    CGFloat w = perRowItemCount * itemW + (perRowItemCount - 1) * margin;
-    
-    int columnCount = ceilf(_picPathStringsArray.count * 1.0 / perRowItemCount);
-    CGFloat h = columnCount * itemH + (columnCount - 1) * margin;
-    
-    self.width = w;
-    self.height = h;
-    
-    /** 设置固定高度保证高度不在自动布局过程中再做调整  */
-    self.fixedHeight = @(h);
-    /** 设置固定宽度保证宽度不在自动布局过程中再做调整  */
-    self.fixedWidth = @(w);
+        return 3;
+        
+    }else{
+        return 2;
+    }
 }
 
 #pragma mark - private actions
@@ -115,35 +192,6 @@
     browser.delegate = self;
     [browser show];
 }
-/** 计算单张图片所占的宽度*/
-- (CGFloat)itemWidthForPicPathArray:(NSArray *)array
-{
-    if (array.count == 1) {
-        
-        return SCREEN_WIDTH - 20;
-    
-    }else if (array.count == 2){
-        
-        return SCREEN_WIDTH - 20 - 5;
-
-    }
-    else {
-        CGFloat w = [UIScreen mainScreen].bounds.size.width > 320 ? 80 : 70;
-        return w;
-    }
-}
-/** 计算每一行图片的张数*/
-- (NSInteger)perRowItemCountForPicPathArray:(NSArray *)array
-{
-    if (array.count < 3) {
-        return array.count;
-    } else if (array.count <= 4) {
-        return 2;
-    } else {
-        return 3;
-    }
-}
-
 #pragma mark - SDPhotoBrowserDelegate
 
 /** 获取质量图片的代理
