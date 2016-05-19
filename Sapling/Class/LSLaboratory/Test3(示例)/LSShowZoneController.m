@@ -59,6 +59,7 @@
     self.tableView.contentOffset = CGPointMake(0, 40);
     /** 注册单元格*/
     [self.tableView registerClass:[LSShowZoneCell class] forCellReuseIdentifier:LSShowZoneCellID];
+    
 }
 - (void)loadData{
     NSArray * temp = [self creatModelsWithCount:10];
@@ -99,6 +100,8 @@
                                 ];
     NSArray * addresses = @[@"花果山",@"水帘洞",@"大雷音寺",@"南天门",@"阎罗殿"];
     NSArray * times = @[@"1分钟前",@"5分钟前",@"10分钟前",@"1小时前",@"1天前"];
+    NSArray * labels = @[@"花果山摄影",@"天下功夫出少林",@"独山风景八百里伏牛山",@"居英山",@"阎罗殿生死薄"];
+
     for (int i = 0 ; i < 5; i++) {
         int r = arc4random_uniform(4);
         [contentsArray addObject:contentFalses[r]];
@@ -112,6 +115,14 @@
         per[@"contentStr"] = contentsArray[r];
         per[@"address"] =[NSString stringWithFormat:@"天安门西 ⊙ 中山公园 ⊙ %@",addresses[r]];
         per[@"time"] = times[r];
+        
+        /** 标签*/
+        int labelCount = arc4random_uniform(5);
+        NSMutableArray * labelsArray = [[NSMutableArray alloc]init];
+        for (int i = 0; i < labelCount; i ++ ) {
+            [labelsArray addObject:labels[i]];
+        }
+        per[@"labels"] = @[@"花果山摄影",@"天下功夫出少林",@"独山风景八百里伏牛山",@"居英山",@"阎罗殿生死薄"];
         /** 伪图片数组*/
         int photos = arc4random_uniform(7);
         NSMutableArray * photosArray = [[NSMutableArray alloc]init];
@@ -173,6 +184,7 @@
         }];
     }
     /** 流畅*/
+    [cell useCellFrameCacheWithIndexPath:indexPath tableView:tableView];
     cell.sd_tableView = tableView;
     cell.sd_indexPath = indexPath;
     cell.model = self.publicArray[indexPath.row];

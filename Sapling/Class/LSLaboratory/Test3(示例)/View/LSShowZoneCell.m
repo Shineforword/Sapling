@@ -8,7 +8,10 @@
 
 #import "LSShowZoneCell.h"
 #import "LSShowZoneModel.h"
+
 #import "LSShowZonePhotosContainer.h"
+#import "LSZoneLabelClassifyView.h"
+#import "LSZoneFavCommentShareView.h"
 
 const CGFloat  LSShowZoneCellContentLabelFontSize = 15;
 CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
@@ -23,10 +26,13 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
 @property (nonatomic, strong) UILabel * contentLabel;
 
 @property (nonatomic, strong) LSShowZonePhotosContainer * photoContainerView;
+@property (nonatomic, strong) LSZoneLabelClassifyView * labelClassifyView;
+@property (nonatomic, strong) LSZoneFavCommentShareView * favCommentShareView;
+
+
 
 @property (nonatomic, strong) UILabel * addressLabel;
 @property (nonatomic, strong) UIButton * operationButton;
-@property (nonatomic, strong) UIView * line;
 
 @end
 @implementation LSShowZoneCell
@@ -93,7 +99,16 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     [_operationButton addTarget:self action:@selector(operationButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     _operationButton.titleLabel.font = [UIFont systemFontOfSize:14];
 
+    /** 相册容器*/
     _photoContainerView = [[LSShowZonePhotosContainer alloc]init];
+    
+    /** 标签容器*/
+    
+    _labelClassifyView = [[LSZoneLabelClassifyView alloc]init];
+    
+    /** favCommentShare*/
+    _favCommentShareView = [[LSZoneFavCommentShareView alloc]init];
+    
     /** 取出cell的内容view*/
     UIView * contentView = self.contentView;
     
@@ -108,6 +123,8 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
                         _addressLabel,
                         _operationButton,
                         _photoContainerView,
+                        _labelClassifyView,
+                        _favCommentShareView,
                         ];
     [_bgView sd_addSubviews:views];
     
@@ -154,12 +171,25 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     _photoContainerView.sd_layout
     .leftEqualToView(_contentLabel);
     
-    
+    /** 地址*/
     _addressLabel.sd_layout
     .topSpaceToView(_photoContainerView,margin + 2)
     .leftSpaceToView(_bgView,margin)
     .heightIs(20)
     .widthIs(SCREEN_WIDTH - margin);
+    
+    /** 标签容器*/
+    _labelClassifyView.sd_layout
+    .leftEqualToView(_contentLabel)
+    .topSpaceToView(_addressLabel,10)
+    .widthIs(SCREEN_WIDTH - 20);
+    
+    /** favCommentShare*/
+    _favCommentShareView.sd_layout
+    .leftSpaceToView(_bgView,0)
+    .topSpaceToView(_labelClassifyView,10)
+    .widthIs(SCREEN_WIDTH)
+    .heightIs(31);
     
     
 }
@@ -182,6 +212,12 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     _timeLabel.text = model.time;
     _contentLabel.text = model.contentStr;
     _addressLabel.text = model.address;
+    _photoContainerView.picPathStringsArray = model.photosArray;
+    /** 标签容器*/
+    _labelClassifyView.labelArray = model.labels;
+
+    /** fav*/
+    _favCommentShareView.titleArray = @[@"22",@"33",@"44"];
     
     /** 如果模型中shouldShowMoreButton(只读属性)为真*/
     if (model.shouldShowMoreButton) {
@@ -210,12 +246,11 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     if (model.photosArray.count) {
         picContainerTopMargin = 10;
     }
-    _photoContainerView.picPathStringsArray = model.photosArray;
     /** 相册容器*/
     _photoContainerView.sd_layout.topSpaceToView(_moreButton, picContainerTopMargin);
     
     /** */
-    [_bgView setupAutoHeightWithBottomView:_addressLabel  bottomMargin:15];
+    [_bgView setupAutoHeightWithBottomView:_favCommentShareView  bottomMargin:15];
     /** 设置Cell的高度自适应，也可用于设置普通view内容高度自适应 */
     [self setupAutoHeightWithBottomView:_bgView bottomMargin:15];
 }
