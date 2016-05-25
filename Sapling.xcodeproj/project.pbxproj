@@ -249,6 +249,9 @@
 		726435E31CEB0E53002CFAF8 /* LSShowZoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435E21CEB0E53002CFAF8 /* LSShowZoneCell.m */; };
 		726435E61CEB0EBE002CFAF8 /* LSShowZoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435E51CEB0EBE002CFAF8 /* LSShowZoneModel.m */; };
 		726435E91CEB1D07002CFAF8 /* LSShowZonePhotosContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435E81CEB1D07002CFAF8 /* LSShowZonePhotosContainer.m */; };
+		7274C0001CF532CE007C25B5 /* CustomLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7274BFFF1CF532CE007C25B5 /* CustomLine.m */; };
+		7274C0031CF55A56007C25B5 /* UniverseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7274C0021CF55A56007C25B5 /* UniverseView.m */; };
+		7274C0061CF55B82007C25B5 /* LSConstructionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7274C0051CF55B82007C25B5 /* LSConstructionController.m */; };
 		727B94C61CE572D700AFFC62 /* LSZonePhotoContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 727B94C51CE572D700AFFC62 /* LSZonePhotoContainerView.m */; };
 		727B94C91CE5802500AFFC62 /* LSZoneCellCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 727B94C81CE5802500AFFC62 /* LSZoneCellCommentView.m */; };
 		729AD65F1CE965E600FFF354 /* YMReplyInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729AD65E1CE965E600FFF354 /* YMReplyInputView.m */; };
@@ -676,6 +679,12 @@
 		726435E51CEB0EBE002CFAF8 /* LSShowZoneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSShowZoneModel.m; sourceTree = "<group>"; };
 		726435E71CEB1D07002CFAF8 /* LSShowZonePhotosContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSShowZonePhotosContainer.h; sourceTree = "<group>"; };
 		726435E81CEB1D07002CFAF8 /* LSShowZonePhotosContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSShowZonePhotosContainer.m; sourceTree = "<group>"; };
+		7274BFFE1CF532CE007C25B5 /* CustomLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLine.h; sourceTree = "<group>"; };
+		7274BFFF1CF532CE007C25B5 /* CustomLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLine.m; sourceTree = "<group>"; };
+		7274C0011CF55A56007C25B5 /* UniverseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniverseView.h; sourceTree = "<group>"; };
+		7274C0021CF55A56007C25B5 /* UniverseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniverseView.m; sourceTree = "<group>"; };
+		7274C0041CF55B82007C25B5 /* LSConstructionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSConstructionController.h; sourceTree = "<group>"; };
+		7274C0051CF55B82007C25B5 /* LSConstructionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSConstructionController.m; sourceTree = "<group>"; };
 		727B94C41CE572D700AFFC62 /* LSZonePhotoContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSZonePhotoContainerView.h; sourceTree = "<group>"; };
 		727B94C51CE572D700AFFC62 /* LSZonePhotoContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSZonePhotoContainerView.m; sourceTree = "<group>"; };
 		727B94C71CE5802500AFFC62 /* LSZoneCellCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSZoneCellCommentView.h; sourceTree = "<group>"; };
@@ -1604,6 +1613,50 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7274BFFC1CF532AD007C25B5 /* Test5(作图) */ = {
+			isa = PBXGroup;
+			children = (
+				7274BFFD1CF532AD007C25B5 /* View */,
+				7274C0041CF55B82007C25B5 /* LSConstructionController.h */,
+				7274C0051CF55B82007C25B5 /* LSConstructionController.m */,
+			);
+			path = "Test5(作图)";
+			sourceTree = "<group>";
+		};
+		7274BFFD1CF532AD007C25B5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7274BFFE1CF532CE007C25B5 /* CustomLine.h */,
+				7274BFFF1CF532CE007C25B5 /* CustomLine.m */,
+				7274C0011CF55A56007C25B5 /* UniverseView.h */,
+				7274C0021CF55A56007C25B5 /* UniverseView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		727AE39F1CF42CF6002A84DE /* Test4(混编) */ = {
+			isa = PBXGroup;
+			children = (
+				727AE3A01CF42D47002A84DE /* Model */,
+				727AE3A11CF42D47002A84DE /* View */,
+			);
+			path = "Test4(混编)";
+			sourceTree = "<group>";
+		};
+		727AE3A01CF42D47002A84DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		727AE3A11CF42D47002A84DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		72B3A5351CC7552300B2FFB4 /* LSBasicalClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -1671,6 +1724,8 @@
 		72C80CE41CE4141E0095E62B /* LSLaboratory */ = {
 			isa = PBXGroup;
 			children = (
+				7274BFFC1CF532AD007C25B5 /* Test5(作图) */,
+				727AE39F1CF42CF6002A84DE /* Test4(混编) */,
 				726435DB1CEB0C33002CFAF8 /* Test3(示例) */,
 				72C80CFF1CE435B70095E62B /* Test1(测试类) */,
 				726435C81CEAAE60002CFAF8 /* Test2(GCD多线程) */,
@@ -2054,6 +2109,7 @@
 			files = (
 				721E6B8C1CE1CAA90020BF48 /* SDBrowserImageView.m in Sources */,
 				725766E31CC8C7D700C51819 /* LSContactViewController.m in Sources */,
+				7274C0031CF55A56007C25B5 /* UniverseView.m in Sources */,
 				72B3A54A1CC7552300B2FFB4 /* LSDiscoverVC.m in Sources */,
 				725766F31CC8C9CD00C51819 /* NSDate+Category.m in Sources */,
 				72625C811CEC1D9C00101FDC /* LSPhotographyController.m in Sources */,
@@ -2088,6 +2144,7 @@
 				725766C31CC8AB4E00C51819 /* EMsgPayload.m in Sources */,
 				721E6B491CE1C9170020BF48 /* SDTimeLineRefreshFooter.m in Sources */,
 				72B3A5481CC7552300B2FFB4 /* LSContactVC.m in Sources */,
+				7274C0001CF532CE007C25B5 /* CustomLine.m in Sources */,
 				721E6AAA1CE1816C0020BF48 /* LSSDContactModel.m in Sources */,
 				721E6B8D1CE1CAA90020BF48 /* SDPhotoBrowser.m in Sources */,
 				725766ED1CC8C8BB00C51819 /* LSMessageCell.m in Sources */,
@@ -2173,6 +2230,7 @@
 				72267DA11CCA06E000F6F24E /* NSString+Message.m in Sources */,
 				72267D991CCA069400F6F24E /* QYQMessageManagerFaceView.m in Sources */,
 				72B3A5471CC7552300B2FFB4 /* SaplingMainVC.m in Sources */,
+				7274C0061CF55B82007C25B5 /* LSConstructionController.m in Sources */,
 				72267D9D1CCA069400F6F24E /* ZBMessageShareMenuItem.m in Sources */,
 				726208211CC71E7700EF988F /* main.m in Sources */,
 				721E6B821CE1CA7F0020BF48 /* README.md in Sources */,
@@ -2328,6 +2386,7 @@
 			baseConfigurationReference = B1D77F21AC6C378BBDCDD8C6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2343,6 +2402,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "--.Sapling";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sapling/Class/LSLaboratory/Test4(混编)/Sapling-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -2351,6 +2412,7 @@
 			baseConfigurationReference = AAACA38C0E14B9568C597C5D /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -2365,6 +2427,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "--.Sapling";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sapling/Class/LSLaboratory/Test4(混编)/Sapling-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -8,6 +8,8 @@
 
 #import "LSGCDTestController.h"
 #import "LSGCD.h"
+/** 测试线*/
+#import "CustomLine.h"
 
 @interface LSGCDTestController()
 
@@ -27,6 +29,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+
     /** UI*/
     _dispatchLabel = [[UILabel alloc]init];
     [self.view addSubview:_dispatchLabel];
@@ -46,6 +49,8 @@
     CGFloat btnW = (SCREEN_WIDTH - 5 * Gap)/4;
     CGFloat btnH = 30;
     NSArray * dispatchArray = @[@"多线程1",@"多线程2",@"多线程3",@"多线程4",@"多线程5",@"多线程6",@"多线程7",@"多线程8",];
+    NSMutableArray * buttonArray = [[NSMutableArray alloc]init];
+    
     for (int i = 0 ;  i < dispatchArray.count ; i ++ ) {
         
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -60,8 +65,8 @@
         .heightIs(btnH);
         button.tag = i;
         [button addTarget:self action:@selector(dispatchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [buttonArray addObject:button];
     }
-    
 }
 - (void)dispatchButtonClicked:(UIButton *)button{
     

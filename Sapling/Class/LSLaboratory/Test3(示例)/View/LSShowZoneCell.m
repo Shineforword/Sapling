@@ -13,6 +13,7 @@
 #import "LSZoneLabelClassifyView.h"
 #import "LSZoneFavCommentShareView.h"
 
+
 const CGFloat  LSShowZoneCellContentLabelFontSize = 15;
 CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
 
@@ -190,8 +191,6 @@ CGFloat  LSMaxContentLabelHeight = 0; // 根据具体font而定
     .topSpaceToView(_labelClassifyView,10)
     .widthIs(SCREEN_WIDTH)
     .heightIs(31);
-    
-    
 }
 -(void)setModel:(LSShowZoneModel *)model{
     _model = model;
