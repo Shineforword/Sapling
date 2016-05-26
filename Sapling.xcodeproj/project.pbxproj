@@ -1616,6 +1616,37 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7266282B1CF6FDEB00EFBC41 /* Test6(直播) */ = {
+			isa = PBXGroup;
+			children = (
+				7266282C1CF6FDEB00EFBC41 /* Controller */,
+				7266282D1CF6FDEB00EFBC41 /* Model */,
+				7266282E1CF6FDEB00EFBC41 /* View */,
+			);
+			path = "Test6(直播)";
+			sourceTree = "<group>";
+		};
+		7266282C1CF6FDEB00EFBC41 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7266282D1CF6FDEB00EFBC41 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7266282E1CF6FDEB00EFBC41 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7274BFFC1CF532AD007C25B5 /* Test5(作图) */ = {
 			isa = PBXGroup;
 			children = (
@@ -1729,6 +1760,7 @@
 		72C80CE41CE4141E0095E62B /* LSLaboratory */ = {
 			isa = PBXGroup;
 			children = (
+				7266282B1CF6FDEB00EFBC41 /* Test6(直播) */,
 				7274BFFC1CF532AD007C25B5 /* Test5(作图) */,
 				727AE39F1CF42CF6002A84DE /* Test4(混编) */,
 				726435DB1CEB0C33002CFAF8 /* Test3(示例) */,
