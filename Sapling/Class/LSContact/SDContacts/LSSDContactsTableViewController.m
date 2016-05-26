@@ -145,17 +145,21 @@
     [newSectionArray removeObjectsInArray:temp];
     
     NSMutableArray *operrationModels = [NSMutableArray new];
-    NSArray *dicts = @[@{@"name" : @"新的朋友(GSD朋友圈)", @"imageName" : @"plugins_FriendNotify"},
-                       @{@"name" : @"群聊(GCD)", @"imageName" : @"add_friend_icon_addgroup"},
-                       @{@"name" : @"标签(圈)", @"imageName" : @"Contact_icon_ContactTag"},
-                       @{@"name" : @"公众号(作图)", @"imageName" : @"add_friend_icon_offical"}];
+    NSArray *dicts = @[@{@"name" : @"GSD朋友圈", @"imageName" : @"plugins_FriendNotify"},
+                       @{@"name" : @"GCD多线程", @"imageName" : @"add_friend_icon_addgroup"},
+                       @{@"name" : @"Zone", @"imageName" : @"Contact_icon_ContactTag"},
+                       @{@"name" : @"Construction作图", @"imageName" : @"add_friend_icon_offical"},
+                       @{@"name" : @"待续", @"imageName" : @"add_friend_icon_offical"},
+                       @{@"name" : @"待续", @"imageName" : @"add_friend_icon_offical"},
+                       @{@"name" : @"待续", @"imageName" : @"add_friend_icon_offical"},
+                       @{@"name" : @"待续", @"imageName" : @"add_friend_icon_offical"},
+                       ];
     for (NSDictionary *dict in dicts) {
         LSSDContactModel *model = [LSSDContactModel new];
         model.name = dict[@"name"];
         model.imageName = dict[@"imageName"];
         [operrationModels addObject:model];
     }
-    
     [newSectionArray insertObject:operrationModels atIndex:0];
     [self.sectionTitlesArray insertObject:@"" atIndex:0];
     

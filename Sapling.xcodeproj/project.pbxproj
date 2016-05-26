@@ -249,6 +249,7 @@
 		726435E31CEB0E53002CFAF8 /* LSShowZoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435E21CEB0E53002CFAF8 /* LSShowZoneCell.m */; };
 		726435E61CEB0EBE002CFAF8 /* LSShowZoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435E51CEB0EBE002CFAF8 /* LSShowZoneModel.m */; };
 		726435E91CEB1D07002CFAF8 /* LSShowZonePhotosContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 726435E81CEB1D07002CFAF8 /* LSShowZonePhotosContainer.m */; };
+		7266282A1CF68D9900EFBC41 /* LSAnimationlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 726628291CF68D9900EFBC41 /* LSAnimationlineView.m */; };
 		7274C0001CF532CE007C25B5 /* CustomLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7274BFFF1CF532CE007C25B5 /* CustomLine.m */; };
 		7274C0031CF55A56007C25B5 /* UniverseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7274C0021CF55A56007C25B5 /* UniverseView.m */; };
 		7274C0061CF55B82007C25B5 /* LSConstructionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7274C0051CF55B82007C25B5 /* LSConstructionController.m */; };
@@ -679,6 +680,8 @@
 		726435E51CEB0EBE002CFAF8 /* LSShowZoneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSShowZoneModel.m; sourceTree = "<group>"; };
 		726435E71CEB1D07002CFAF8 /* LSShowZonePhotosContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSShowZonePhotosContainer.h; sourceTree = "<group>"; };
 		726435E81CEB1D07002CFAF8 /* LSShowZonePhotosContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSShowZonePhotosContainer.m; sourceTree = "<group>"; };
+		726628281CF68D9900EFBC41 /* LSAnimationlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSAnimationlineView.h; sourceTree = "<group>"; };
+		726628291CF68D9900EFBC41 /* LSAnimationlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSAnimationlineView.m; sourceTree = "<group>"; };
 		7274BFFE1CF532CE007C25B5 /* CustomLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLine.h; sourceTree = "<group>"; };
 		7274BFFF1CF532CE007C25B5 /* CustomLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLine.m; sourceTree = "<group>"; };
 		7274C0011CF55A56007C25B5 /* UniverseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniverseView.h; sourceTree = "<group>"; };
@@ -1630,6 +1633,8 @@
 				7274BFFF1CF532CE007C25B5 /* CustomLine.m */,
 				7274C0011CF55A56007C25B5 /* UniverseView.h */,
 				7274C0021CF55A56007C25B5 /* UniverseView.m */,
+				726628281CF68D9900EFBC41 /* LSAnimationlineView.h */,
+				726628291CF68D9900EFBC41 /* LSAnimationlineView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2172,6 +2177,7 @@
 				721E6B7C1CE1CA7F0020BF48 /* NSAttributedString+MLExpression.m in Sources */,
 				72267DC91CCA081200F6F24E /* HawkPhotoBrowser.m in Sources */,
 				72C80CEA1CE419740095E62B /* LSGroupListViewController.m in Sources */,
+				7266282A1CF68D9900EFBC41 /* LSAnimationlineView.m in Sources */,
 				72267DC81CCA081200F6F24E /* BrowserUIImageView.m in Sources */,
 				721E6AAD1CE1823B0020BF48 /* LSSDAnalogDataGenerator.m in Sources */,
 				72625C7B1CEC10A900101FDC /* LSBaseCollectionController.m in Sources */,
