@@ -48,7 +48,16 @@
     CGFloat Gap = 10;
     CGFloat btnW = (SCREEN_WIDTH - 5 * Gap)/4;
     CGFloat btnH = 30;
-    NSArray * dispatchArray = @[@"多线程1",@"多线程2",@"多线程3",@"多线程4",@"多线程5",@"多线程6",@"多线程7",@"多线程8",];
+    NSArray * dispatchArray = @[@"同步+主队列(子)",
+                                @"同步+主队列(主)",
+                                @"异步+主队列",
+                                @"同步+并发",
+                                @"同步+串行",
+                                @"异步+串行",
+                                @"异步+并发",
+                                @"线程之间的通信",
+                                @"栅栏",
+                                @"队列组"];
     NSMutableArray * buttonArray = [[NSMutableArray alloc]init];
     
     for (int i = 0 ;  i < dispatchArray.count ; i ++ ) {
@@ -64,6 +73,7 @@
         .widthIs(btnW)
         .heightIs(btnH);
         button.tag = i;
+        [button.titleLabel setFont:[UIFont systemFontOfSize:10]];
         [button addTarget:self action:@selector(dispatchButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [buttonArray addObject:button];
     }
@@ -71,136 +81,71 @@
 - (void)dispatchButtonClicked:(UIButton *)button{
     
     if (button.tag == 0) {
+        //同步函数 + 主队列 (子线程)
+        [self syncMain1];
         
-        [self simulateDownloadDataSource];
     }
     if (button.tag == 1) {
-        
-        [self simulateGCDGroup];
+        //同步函数 + 主队列 (主线程)
+        [self syncMain2];
+
     }
     if (button.tag == 2) {
         
-        [self simulateGCDTimer];
+        //异步 + 主队列
+        [self asyncMain];
+        
     }
     if (button.tag == 3) {
         
-        [self simulateGCDSemaphore];
+        //同步 + 并发
+        [self syncConcurrent];
+        
     }
-    
-}
-- (void)simulateGCDSemaphore{
-    // init semaphore
-    LSGCDSemaphore *semaphore = [LSGCDSemaphore new];
-    
-    // wait
-    [LSGCDQueue executeInGlobalQueue:^{
+    if (button.tag == 4) {
+        //同步 + 串行
+        [self syncSerial];
         
-        [semaphore wait];
+    }
+    if (button.tag == 5) {
+        //异步 + 串行
+        [self asyncSerial];
         
-        // todo sth else
-    }];
-    
-    // signal
-    [LSGCDQueue executeInGlobalQueue:^{
         
-        // do sth
-        [semaphore signal];
-    }];
+    }
+    if (button.tag == 6) {
+        //异步 + 并发
+        [self asyncConcurrent];
 
-}
-- (void)simulateGCDTimer{
-    // init timer
-    self.timer = [[LSGCDTimer alloc] initInQueue:[LSGCDQueue mainQueue]];
-    
-    // timer event
-    [self.timer event:^{
         
-        // task
+    }
+    if (button.tag == 7) {
+        //线程之间的通信
+        [self commucationBetweenTwoThread];
         
-    } timeInterval:NSEC_PER_SEC * 3 delay:NSEC_PER_SEC * 3];
-    
-    // start timer
-    [self.timer start];
-    
-}
-- (void)simulateGCDGroup{
-    // init group
-    LSGCDGroup *group = [LSGCDGroup new];
-    
-    // add to group
-    [[LSGCDQueue globalQueue] execute:^{
         
-        [self taskOne];
+    }
+    if (button.tag == 8) {
+        //栅栏
+        [self barrier];
         
-    } inGroup:group];
-    
-    // add to group
-    [[LSGCDQueue globalQueue] execute:^{
-      
-        [self taskTwo];
+    }
+    if (button.tag == 9) {
+        //队列组1
+        [self useDispatchGroup];
         
-    } inGroup:group];
-    
-    // notify in mainQueue
-    [[LSGCDQueue mainQueue] notify:^{
-        
-        [self taskThree];
-        
-    } inGroup:group];
-}
-/** 模仿数据下载后更新UI*/
-- (void)simulateDownloadDataSource{
-    
-    [LSGCDQueue executeInGlobalQueue:^{
-        
-        // download task, etc
-        [self downLoadDataSource];
-        
-        [LSGCDQueue executeInMainQueue:^{
-            
-            // update UI
-            [self upDateUI];
-        }];
-    }];
+    }
+    if (button.tag == 10) {
+        //队列组2
+        [self useDispatchGroup];
 
-}
-#pragma mark - private methods
-/** 耗时操作*/
-- (void)downLoadDataSource{
-    NSLog(@"耗时5s");
-    [LSGCDQueue executeInMainQueue:^{
-        _dispatchLabel.text = @"模仿下载...5s";
-    }];
-    sleep(5);
-}
-/** 更新UI*/
-- (void)upDateUI{
-    
-    _dispatchLabel.text = @"下载完成更新视图...";
-    NSLog(@"更新UI");
+    }
 
-}
-- (void)taskOne{
-    NSLog(@"耗时1s");
-    _dispatchLabel.text = @"耗时1s...";
-    sleep(1);
-}
-- (void)taskTwo{
-    NSLog(@"耗时2s");
-    _dispatchLabel.text = @"耗时2s...";
-    sleep(2);
-}
-- (void)taskThree{
-    NSLog(@"耗时3s");
-    _dispatchLabel.text = @"耗时3s...";
-    sleep(3);
-}
-- (void)timerTask{
-    NSLog(@"timerTask耗时3s");
-    _dispatchLabel.text = @"耗时3s...";
-    sleep(3);
+
+    
 }
 
+#pragma mark - 同步函数 + 主队列 (子线程)
 /** 如果是在子线程中调用 同步函数 +  主队列 ,那没有什么问题*/
 - (void)syncMain1{
     
@@ -220,6 +165,7 @@
     });
     
 }
+#pragma mark - 同步函数 + 主队列 (主线程)
 /** 
  如果是在主线程中调用同步函数 + 主队列 那么会导致死锁
  导致死锁的原因:
@@ -241,6 +187,7 @@
     });
     
 }
+#pragma mark - 异步 + 主队列
 /** 异步 + 主队列 : 不会创建新的线程, 并且任务是在主线程中执行的*/
 - (void)asyncMain{
     //主队列
@@ -252,6 +199,8 @@
     });
     
 }
+
+#pragma mark - 同步 + 并发
 /**同步 + 并发:不会开启新的线程 */
 - (void)syncConcurrent{
     //创建一个并发队列
@@ -273,6 +222,7 @@
     });
 
 }
+#pragma mark - 同步 + 串行
 /** 同步 + 串行 : 不会开启新的线程*/
 /** 注意: 如果是调用 同步函数,那么会等同步函数中的任务执行完毕,才会执行后面的代码*/
 - (void)syncSerial{
@@ -298,6 +248,7 @@
     });
 
 }
+#pragma mark - 异步 + 串行
 /** 异步 + 串行
  只会开启一个新的线程
  注意:如果调用异步函数,那么不用等到函数中的任务执行完毕,就会执行后面的代码
@@ -323,6 +274,7 @@
     });
 
 }
+#pragma mark - 异步 + 并发
 /** 异步 + 并发 : 会开启新的线程
  如果任务较多就会开启多个线程
  */
@@ -610,4 +562,119 @@
     });
 
 }
+
+#pragma mark - GCD 自定义的一些使用方法
+- (void)simulateGCDSemaphore{
+    // init semaphore
+    LSGCDSemaphore *semaphore = [LSGCDSemaphore new];
+    
+    // wait
+    [LSGCDQueue executeInGlobalQueue:^{
+        
+        [semaphore wait];
+        
+        // todo sth else
+    }];
+    
+    // signal
+    [LSGCDQueue executeInGlobalQueue:^{
+        
+        // do sth
+        [semaphore signal];
+    }];
+    
+}
+- (void)simulateGCDTimer{
+    // init timer
+    self.timer = [[LSGCDTimer alloc] initInQueue:[LSGCDQueue mainQueue]];
+    
+    // timer event
+    [self.timer event:^{
+        
+        // task
+        
+    } timeInterval:NSEC_PER_SEC * 3 delay:NSEC_PER_SEC * 3];
+    
+    // start timer
+    [self.timer start];
+    
+}
+- (void)simulateGCDGroup{
+    // init group
+    LSGCDGroup *group = [LSGCDGroup new];
+    
+    // add to group
+    [[LSGCDQueue globalQueue] execute:^{
+        
+        [self taskOne];
+        
+    } inGroup:group];
+    
+    // add to group
+    [[LSGCDQueue globalQueue] execute:^{
+        
+        [self taskTwo];
+        
+    } inGroup:group];
+    
+    // notify in mainQueue
+    [[LSGCDQueue mainQueue] notify:^{
+        
+        [self taskThree];
+        
+    } inGroup:group];
+}
+/** 模仿数据下载后更新UI*/
+- (void)simulateDownloadDataSource{
+    
+    [LSGCDQueue executeInGlobalQueue:^{
+        
+        // download task, etc
+        [self downLoadDataSource];
+        
+        [LSGCDQueue executeInMainQueue:^{
+            
+            // update UI
+            [self upDateUI];
+        }];
+    }];
+    
+}
+#pragma mark - private methods
+/** 耗时操作*/
+- (void)downLoadDataSource{
+    NSLog(@"耗时5s");
+    [LSGCDQueue executeInMainQueue:^{
+        _dispatchLabel.text = @"模仿下载...5s";
+    }];
+    sleep(5);
+}
+/** 更新UI*/
+- (void)upDateUI{
+    
+    _dispatchLabel.text = @"下载完成更新视图...";
+    NSLog(@"更新UI");
+    
+}
+- (void)taskOne{
+    NSLog(@"耗时1s");
+    _dispatchLabel.text = @"耗时1s...";
+    sleep(1);
+}
+- (void)taskTwo{
+    NSLog(@"耗时2s");
+    _dispatchLabel.text = @"耗时2s...";
+    sleep(2);
+}
+- (void)taskThree{
+    NSLog(@"耗时3s");
+    _dispatchLabel.text = @"耗时3s...";
+    sleep(3);
+}
+- (void)timerTask{
+    NSLog(@"timerTask耗时3s");
+    _dispatchLabel.text = @"耗时3s...";
+    sleep(3);
+}
+
 @end
